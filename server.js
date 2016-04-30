@@ -7,6 +7,7 @@ var amqp = require("amqp"),
 	MongoDB = require("./services/commons/mongodbhandler");
 
 var Trips = require("./services/trips/tripshandler");
+var Trucks = require("./services/trucks/truckshandler");
 
 var connection = amqp.createConnection({host: "127.0.0.1"});
 
@@ -16,6 +17,8 @@ MongoDB.connect(MongoDB.MONGODB_URL, function(){
 
 connection.on("ready", function () {
 	listenToQueue(connection, "trips_queue", Trips);
+	listenToQueue(connection, "trucks_queue", Trucks);
+
 });
 
 var listenToQueue = function (connection, queueName, Handler) {

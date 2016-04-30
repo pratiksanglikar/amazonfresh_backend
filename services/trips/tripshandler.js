@@ -17,7 +17,7 @@ exports.handleRequest = function (message, callback) {
 		case "all_trips":
 			exports.getAllTrips(message.payload, callback);
 			break;
-		case "trip_by_driver":
+		case "trips_by_driver":
 			exports.getTripsByDriver(message.payload, callback);
 			break;
 		case "generate_trip":
@@ -25,6 +25,9 @@ exports.handleRequest = function (message, callback) {
 			break;
 		case "get_trip_id":
 			exports.findTripById(message.tripID, callback);
+			break;
+		case "trips_by_customer":
+			exports.getTripsByCustomer(message, callback);
 	}
 }
 
@@ -74,23 +77,27 @@ exports.findTripsByDriver = function (driverID) {
  * @param driverID
  * @returns {*|promise}
  */
-exports.findTripsByCustomer = function (customerID) {
-	var deferred = q.defer();
+exports.findTripsByCustomer = function (customerID, callback) {
 	var trips = [];
 	var cursor = MongoDB.collection("trips").find({
 		customerSSN: customerID
 	});
 	cursor.each(function (error, doc) {
 		if (error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
 		}
 		if (doc != null) {
 			trips.push(doc);
 		} else {
-			deferred.resolve(trips);
+			callback(null, {
+				statusCode: 200,
+				response: trips
+			});
 		}
 	});
-	return deferred.promise;
 };
 
 
@@ -311,25 +318,35 @@ _findFreeDriver = function () {
 };
 
 
-exports.getTripsByDriver = function () {
-	var deferred = q.defer();
-	var cursor = MongoDB.collection("trips").group(['driverFirstName','driverLastName'],{},{"total":0},"function(obj, prev) {prev.total++;}", function(error, results){
+exports.getTripsByDriver = function (message, callback) {
+	MongoDB.collection("trips").group(['driverFirstName','driverLastName'],{},{"total":0},"function(obj, prev) {prev.total++;}", function(error, results){
 		if(error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
 		} else {
-			deferred.resolve(results);
+			callback(null, {
+				statusCode: 200,
+				response: results
+			});
 		}
 	});
-	return deferred.promise;
 };
 
-exports.getTripsByCustomer = function () {
+exports.getTripsByCustomer = function (message, callback) {
 	var deferred = q.defer();
 	MongoDB.collection("trips").group(['customerFirstName','customerLastName'],{},{"total":0},"function(obj, prev) {prev.total++;}", function(error, results) {
 		if(error) {
-			deferred.reject(error);
+			callback(error,{
+				statusCode: 500,
+				error: error
+			});
 		} else {
-			deferred.resolve(results);
+			callback(null, {
+				statusCode:200,
+				response: results
+			});
 		}
 	});
 	return deferred.promise;

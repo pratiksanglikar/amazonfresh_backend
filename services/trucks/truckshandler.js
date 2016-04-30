@@ -8,12 +8,43 @@ var Q = require("q");
 var UserTypes = require("../commons/constants").usertypes;
 var GoogleMaps = require("../commons/googlemapshandler");
 
+
+exports.handleRequest = function (message, callback) {
+	switch (message.type) {
+		case "get_all_trucks":
+			exports.getAllTrucks(message, callback);
+			break;
+		case "search":
+			exports.searchByAnyAttributes(message.data, callback);
+			break;
+		case "pending_trucks":
+			exports.getPendingTrucks(message, callback);
+			break;
+		case "truck_by_id":
+			exports.getTruck(message.ssn, callback);
+			break;
+		case "update_truck":
+			exports.updateTruckDriver(message.info, callback);
+			break;
+		case "sign_up_truck":
+			exports.signuptruck(message.info, callback);
+			break;
+		case "delete_truck":
+			exports.delete(message.ssn, callback);
+			break;
+		default:
+			callback("Malformed request",{
+				statusCode: 400,
+				error: "Malformed Request"
+			});
+	}
+}
+
 /**
  * gets pending requests for the trucks.
  * @returns {*}
  */
-exports.getPendingTrucks = function () {
-	var deferred = Q.defer();
+exports.getPendingTrucks = function (message, callback) {
 	var data = [];
 	var cursor = MongoDB.collection("users").find({
 		usertype: UserTypes.DRIVER,
@@ -21,15 +52,20 @@ exports.getPendingTrucks = function () {
 	});
 	cursor.each(function (error, doc) {
 		if(error) {
-			deferred.reject(error);
+			callback(error,{
+				statusCode: 500,
+				error: error
+			});
 		}
 		if(doc != null) {
 			data.push(doc);
 		} else {
-			deferred.resolve(data);
+			callback(null, {
+				statusCode: 200,
+				response: data
+			});
 		}
 	});
-	return deferred.promise;
 };
 
 /**
@@ -37,7 +73,7 @@ exports.getPendingTrucks = function () {
  * @param info
  * @returns {*|promise}
  */
-exports.signuptruck = function (info) {
+exports.signuptruck = function (info, callback) {
 	var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
 	var promise1 = GoogleMaps.getLatLang(address);
 	var deferred = Q.defer();
@@ -47,14 +83,22 @@ exports.signuptruck = function (info) {
 		info = _sanitizeTrucksInfo(info);
 		var cursor = MongoDB.collection("users").insert(info);
 		cursor.then(function (user) {
-			deferred.resolve(user);
+			callback(null,{
+				statusCode: 200,
+				response: user
+			});
 		}).catch(function (error) {
-			deferred.reject(error);
+			callback(error,{
+				statusCode: 500,
+				error: error
+			});
 		});
 	}, function (error) {
-		deferred.reject(error);
+		callback(error, {
+			statusCode: 500,
+			error: error
+		});
 	});
-	return deferred.promise;
 };
 
 /**
@@ -62,8 +106,7 @@ exports.signuptruck = function (info) {
  * @param info
  * @returns {*|promise}
  */
-exports.searchByAnyAttributes = function(info){
-	var deferred = Q.defer();
+exports.searchByAnyAttributes = function(info, callback) {
 	var searchQuery = JSON.parse(info);
 		searchQuery = _sanitizeForTruckUpdate(searchQuery);
 	var truckList = [];
@@ -72,20 +115,28 @@ exports.searchByAnyAttributes = function(info){
 	{
 		cursor.each(function (err, doc) {
 			if (err) {
-				deferred.reject(err);
+				callback(err, {
+					statusCode: 500,
+					error: err
+				});
 			}
 			if (doc != null) {
 				truckList.push(doc);
 			} else {
-				deferred.resolve(truckList);
+				callback(null, {
+					statusCode: 200,
+					response: truckList
+				});
 			}
 		});
 	}
 	else
 	{
-		deferred.reject("There are no Advanced Search Records for Trucks");
+		callback("There are no Advanced Search Records for Trucks",{
+			statusCode: 500,
+			error: "There are no Advanced Search Records for Trucks"
+		});
 	}
-	return deferred.promise;
 };
 
 /**
@@ -116,8 +167,7 @@ exports.delete = function (ssn) {
  * @param ssn
  * @returns {*|promise}
  */
-exports.getTruck = function(ssn) {
-	var deferred = Q.defer();
+exports.getTruck = function(ssn, callback) {
 	var user = null;
 	var cursor = MongoDB.collection("users").find({
 		ssn: ssn,
@@ -126,27 +176,35 @@ exports.getTruck = function(ssn) {
 	});
 	cursor.each(function (error, doc) {
 		if(error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
 		}
 		if(doc == null) {
 			if(user == null) {
-				deferred.reject("Truck Driver not found!");
+				callback("Truck Driver not found!",{
+					statusCode: 500,
+					error: "Truck driver not found!"
+				});
 			} else {
-				deferred.resolve(user);
+				delete user.password;
+				callback(null,{
+					statusCode: 200,
+					response: user
+				});
 			}
 		} else {
 			user = doc;
 		}
 	});
-	return deferred.promise;
 };
 
 /**
  * returns the all the trucks in the system.
  * @returns {*|promise}
  */
-exports.getAllTrucks = function () {
-	var deferred = Q.defer();
+exports.getAllTrucks = function (payload, callback) {
 	var cursor = MongoDB.collection("users").find({
 		isApproved: true,
 		usertype: UserTypes.DRIVER
@@ -154,15 +212,20 @@ exports.getAllTrucks = function () {
 	var trucks = [];
 	cursor.each(function (error, doc) {
 		if (error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
 		}
 		if (doc != null) {
 			trucks.push(doc);
 		} else {
-			deferred.resolve(trucks);
+			callback(null,{
+				statusCode: 200,
+				response: trucks
+			});
 		}
 	});
-	return deferred.promise;
 };
 
 /**
@@ -182,9 +245,7 @@ _sanitizeTrucksInfo = function (info) {
  * function to update the truck driver.
  * @param info
  */
-exports.updateTruckDriver = function (info) {
-	var deferred = Q.defer();
-	console.log("Information in trucksHandler :"+ info.ssn);
+exports.updateTruckDriver = function (info, callback) {
 	var cursor = MongoDB.collection("users").update({"ssn" : info.ssn},
 		{
 			"firstName" : info.firstName,
@@ -205,11 +266,16 @@ exports.updateTruckDriver = function (info) {
 			"freeFrom" : info.freeFrom
 		});
 	cursor.then(function (result) {
-		deferred.resolve(result);
+		callback(null,{
+			statusCode: 200,
+			response: result
+		});
 	}).catch(function (error) {
-		deferred.reject(error);
+		callback(error, {
+			statusCode: 500,
+			error: error
+		});
 	});
-	return deferred.promise;
 };
 
 /**
