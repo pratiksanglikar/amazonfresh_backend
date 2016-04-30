@@ -17,7 +17,14 @@ exports.handleRequest = function (message, callback) {
 		case "all_trips":
 			exports.getAllTrips(message.payload, callback);
 			break;
-
+		case "trip_by_driver":
+			exports.getTripsByDriver(message.payload, callback);
+			break;
+		case "generate_trip":
+			exports.generateTrip(message.customerID, message.farmerID, message.productID, callback);
+			break;
+		case "get_trip_id":
+			exports.findTripById(message.tripID, callback);
 	}
 }
 
@@ -116,28 +123,34 @@ exports.findTripsByDeliveryCity = function (city) {
  * @param tripID
  * @returns {*|promise}
  */
-exports.findTripById = function (tripID) {
-	var deferred = q.defer();
+exports.findTripById = function (tripID, callback) {
 	var trip = null;
 	var cursor = MongoDB.collection("trips").find({
 		tripID: tripID
 	});
-
 	cursor.each(function (error, doc) {
 		if (error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
 		}
 		if (doc != null) {
 			trip = doc;
 		} else {
 			if (trip === null) {
-				deferred.reject("Trip with given ID not found!");
+				callback("Trip with given ID not found!", {
+					statusCode: 500,
+					error: "Trip with given ID not found!"
+				});
 			} else {
-				deferred.resolve(trip);
+				callback(null, {
+					statusCode: 200,
+					response: trip
+				});
 			}
 		}
 	});
-	return deferred.promise;
 };
 
 /**
@@ -171,8 +184,7 @@ exports.getAllTrips = function (message, callback) {
  * @param farmerID
  * @param productID
  */
-exports.generateTrip = function (customerID, farmerID, productID) {
-	var deferred = q.defer();
+exports.generateTrip = function (customerID, farmerID, productID, callback) {
 	var customerPromise = CustomerHandler.getCustomer(customerID);
 	var farmerPromise = FarmerHandler.getFarmerInfo(farmerID);
 	var productPromise = ProductHandler.getproductinfo(productID);
@@ -190,23 +202,40 @@ exports.generateTrip = function (customerID, farmerID, productID) {
 				cursor.then(function () {
 					var updateDriver = MongoDB.collection("users").update({ssn: driver.ssn}, {$set: {freeFrom: tripDetails.deliveryTime}});
 					updateDriver.then(function () {
-						deferred.resolve(tripDetails);
+						callback(null,{
+							statusCode: 200,
+							response: tripDetails
+						});
 					}).catch(function (error) {
-						deferred.reject(error);
+						callback(error, {
+							statusCode: 500,
+							error: error
+						});
 					});
 				}).catch(function (error) {
-					deferred.reject(error);
+					callback(error, {
+						statusCode: 500,
+						error: error
+					});
 				});
 			}, function (error) {
-				deferred.reject(error);
+				callback(error, {
+					statusCode: 500,
+					error: error
+				});
 			});
 		}, function (error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
 		});
 	}, function (error) {
-		deferred.reject(error);
+		callback(error, {
+			statusCode: 500,
+			error: error
+		});
 	});
-	return deferred.promise;
 };
 
 /**
