@@ -6,6 +6,28 @@ var Utilities = require("../commons/utilities");
 var Q = require("q");
 var UserTypes = require("../commons/constants").usertypes;
 var Crypto = require("crypto");
+var redisClient = require('redis').createClient;
+var redis = redisClient(6379, 'localhost');
+
+exports.handleRequest = function (message, callback) {
+	switch (message.type){
+
+		case "createproduct":
+			exports.createproduct(message.info, message.user, callback);
+			break;
+		case "delete":
+			exports.delete(message.productID, callback);
+			break;
+		case "listallproducts":
+			exports.listallproducts(message.payload, callback);
+			break;
+		case "getproductinfo":
+			exports.getproductinfo(message.productID, callback);
+
+
+	}
+}
+
 
 
 exports.adjustDynamicPrice = function (productId, count, productPrice) {
@@ -50,7 +72,7 @@ exports.setProductPrice = function (productId, price) {
  * @param info
  * @returns {*|promise}
  */
-exports.createproduct = function (info, user) {
+exports.createproduct = function (info, user, callback) {
 	var productID = Crypto.createHash('sha1').update(info.productName + user.ssn + new Date().getTime()).digest('hex');
 	info.productID = productID;
 	var deferred = Q.defer();
@@ -60,18 +82,34 @@ exports.createproduct = function (info, user) {
 			info = _sanitizeProductInfo(info, user);
 			var cursor = MongoDB.collection("products").insert(info);
 			cursor.then(function (user) {
-				deferred.resolve(user);
+				callback(null, {
+					statusCode: 200,
+					response: user
+				});
+				//deferred.resolve(user);
 			}).catch(function (error) {
-				deferred.reject(error);
+				callback(error, {
+					statusCode: 500,
+					error: error
+				});
+				// deferred.reject(error);
 			});
 		} else {
-			deferred.reject("All values must be provided!");
+			callback("All values must be provided!", {
+				statusCode: 500,
+				error: "All values must be provided!"
+			});
+			//deferred.reject("All values must be provided!");
 		}
 	} else {
-		deferred.reject("Not a farmer!");
-		return deferred.promise;
+		//deferred.reject("Not a farmer!");
+		callback("All values must be provided!", {
+			statusCode: 500,
+			error: "All values must be provided!"
+		});
+
 	}
-	return deferred.promise;
+
 };
 
 /**
@@ -100,7 +138,7 @@ exports.delete = function (productID) {
  * function to list all products.
  * @returns {*|promise}
  */
-exports.listallproducts = function () {
+exports.listallproducts = function (message,callback) {
 	var deferred = Q.defer();
 	var productList = [];
 	var cursor = MongoDB.collection("products").find({
@@ -109,20 +147,32 @@ exports.listallproducts = function () {
 	if (cursor != null) {
 		cursor.each(function (err, doc) {
 			if (err) {
-				deferred.reject(err);
+				callback(err, {
+					statusCode: 500,
+					error: err
+				});
+				//deferred.reject(err);
 			}
 			else if (doc != null) {
 				productList = productList.concat(doc);
 			}
 			else {
-				deferred.resolve(productList);
+				callback(null, {
+					statusCode: 200,
+					response: productList
+				});
+				//deferred.resolve(productList);
 			}
 		});
 	}
 	else {
-		deferred.reject("There are no Records for products");
+		callback("No records for products!", {
+			statusCode: 500,
+			error: "No records for products!"
+		});
+		//deferred.reject("There are no Records for products");
 	}
-	return deferred.promise;
+
 };
 /**
  *
