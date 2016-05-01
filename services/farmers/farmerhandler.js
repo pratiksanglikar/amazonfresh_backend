@@ -19,7 +19,7 @@ exports.handleRequest = function (message, callback) {
             exports.getFarmerInfo(message.ssn, callback);
             break;
         case "deletefarmer":
-                     exports.delete(message.data, callback);
+            exports.delete(message.data, callback);
             break;
         case "searchfarmer":
             exports.searchFarmerInfo(message.data, callback);
@@ -27,7 +27,6 @@ exports.handleRequest = function (message, callback) {
         case "updatefarmer":
             exports.updateFarmer(message.data, callback);
             break;
-
         case "view_farmer":
             exports.farmerViewInfo(message.data, callback);
             break;

@@ -342,35 +342,33 @@ exports.searchproduct = function (productName) {
 	return deferred.promise;
 };
 
-exports.updateproduct = function (info,callback) {
+exports.updateproduct = function (info, callback) {
 	var deferred = Q.defer();
 	//var promise = _validateProductInfo(info);
-	console.log("Info is "+info);
-		var cursor = MongoDB.collection("products").update({"productID": info.productID},
-			{
-				"productID": info.productID,
-				"productName": info.productName,
-				"productPrice": info.productPrice,
-				"description": info.description,
-				"productImage": info.productImage,
-				"farmerFirstName": info.farmerFirstName,
-				"farmerLastName": info.farmerLastName,
-				"farmerSSN": info.farmerSSN,
-				"reviews": info.reviews,
-				"isApproved": info.isApproved
-			});
-		cursor.then(function () {
-			console.log("updated in backend");
-			callback(null, {
-				statusCode: 200,
-				error : null
-			});
-		}).catch(function (error) {
-			callback(error, {
-				statusCode: 500,
-				error : error
-			});
+	var cursor = MongoDB.collection("products").update({"productID": info.productID},
+		{
+			"productID": info.productID,
+			"productName": info.productName,
+			"productPrice": info.productPrice,
+			"description": info.description,
+			"productImage": info.productImage,
+			"farmerFirstName": info.farmerFirstName,
+			"farmerLastName": info.farmerLastName,
+			"farmerSSN": info.farmerSSN,
+			"reviews": info.reviews,
+			"isApproved": info.isApproved
 		});
+	cursor.then(function () {
+		callback(null, {
+			statusCode: 200,
+			error: null
+		});
+	}).catch(function (error) {
+		callback(error, {
+			statusCode: 500,
+			error: error
+		});
+	});
 };
 
 /**
@@ -384,6 +382,8 @@ _sanitizeProductInfo = function (info, user) {
 	info.farmerSSN = user.ssn;
 	info.reviews = [];
 	info.isApproved = false;
+	info.rating = 3.4;
+	info.numberOfRatings = 5;
 	delete info.ssn;
 	return info;
 }
@@ -397,13 +397,12 @@ _sanitizeProductInfo = function (info, user) {
  * @returns {*|promise}
  * @private
  */
-/*
+
 _validateProductInfo = function (info) {
-	if (
-		Utilities.isEmpty(info.productName) || Utilities.isEmpty(info.productPrice) || Utilities.isEmpty(info.description)) {
+	if (Utilities.isEmpty(info.productName) || Utilities.isEmpty(info.productPrice) || Utilities.isEmpty(info.description)) {
 		return false;
 	}
 	else {
 		return true;
 	}
-};*/
+};
