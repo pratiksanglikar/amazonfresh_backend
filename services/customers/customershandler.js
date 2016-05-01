@@ -9,25 +9,49 @@ var Q = require("q");
 var UserTypes = require("../commons/constants").usertypes;
 var GoogleMaps = require("../commons/googlemapshandler");
 
-exports.signup = function(info)
+exports.handleRequest = function (message, callback) {
+    switch (message.type){
+        case "signup_customer":
+            exports.signup(message.data, callback);
+            break;
+
+        case "update_customer":
+            exports.updateCustomer(message.data, callback);
+            break;
+
+    }
+}
+
+
+exports.signup = function(info,callback)
 {
     var deferred = Q.defer();
     var promise = _validateCustomerInfo(info);
-	var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
-	var promise1 = GoogleMaps.getLatLang(address);
+    var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
+    var promise1 = GoogleMaps.getLatLang(address);
     Q.all([promise, promise1]).done(function (values) {
         info = _sanitizeCustomerInfo(info);
-		info.location = values[1];
-		var cursor = MongoDB.collection("users").insert(info);
-        cursor.then(function (user) {
-            deferred.resolve(user);
+        info.location = values[1];
+        var cursor = MongoDB.collection("users").insert(info);
+        cursor.then(function () {
+            console.log("yuppie..>!!!!");
+            callback(null, {
+                statusCode: 200,
+                error: null
+            });
+
         }).catch(function (error) {
-            deferred.reject(error);
+            callback(error, {
+                statusCode: 500,
+                error: error
+            });
         });
-    },function (error) {
-        deferred.reject(error);
+    },function(error) {
+        callback(error, {
+            statusCode: 500,
+            error: error
+        });
     });
-    return deferred.promise;
 };
 
 /**
@@ -92,25 +116,25 @@ exports.getCustomersList = function()
  * @returns {*|promise}
  */
 exports.getCustomer = function (ssn) {
-	var deferred = Q.defer();
-	var customer;
-	var cursor = MongoDB.collection("users").find({ssn: ssn});
-	cursor.each(function (error, doc) {
-		if (error) {
-			deferred.reject(error);
-		}
-		if (doc != null) {
-			customer = doc;
-		} else {
-			if (customer === null) {
-				deferred.reject("Customer not found!");
-			} else {
-				console.log(customer);
-				deferred.resolve(customer);
-			}
-		}
-	});
-	return deferred.promise;
+    var deferred = Q.defer();
+    var customer;
+    var cursor = MongoDB.collection("users").find({ssn: ssn});
+    cursor.each(function (error, doc) {
+        if (error) {
+            deferred.reject(error);
+        }
+        if (doc != null) {
+            customer = doc;
+        } else {
+            if (customer === null) {
+                deferred.reject("Customer not found!");
+            } else {
+                console.log(customer);
+                deferred.resolve(customer);
+            }
+        }
+    });
+    return deferred.promise;
 };
 
 _validateCustomerInfo = function (info) {
@@ -155,11 +179,11 @@ _sanitizeCustomerInfo = function (info) {
     console.log("In cust sanitize");
     info.password = PasswordManager.encryptPassword(info.password);
     info.usertype = UserTypes.CUSTOMER;
-	info.isApproved = false;
+    info.isApproved = false;
     return info;
 };
 
-exports.customerViewInfo = function(info)
+exports.customerViewInfo = function(info,callback)
 {
     var deferred = Q.defer();
     var info = JSON.parse(info);
@@ -167,21 +191,25 @@ exports.customerViewInfo = function(info)
     var customerList = {};
     cursor.each(function (err, doc) {
         if (err) {
-            deferred.reject(err);
+            callback(null, {
+                statusCode: 500,
+                error: err
+            });
         }
         if (doc != null) {
             customerList = doc;
         } else {
-            console.log(customerList);
-            deferred.resolve(customerList);
+            callback(null, {
+                statusCode: 200,
+                error: null,
+                data : customerList
+            });
         }
     });
-    return deferred.promise;
-
 };
 
 
-exports.updateCustomer = function(info)
+exports.updateCustomer = function(info,callback)
 {
     var deferred = Q.defer();
     console.log(info);
@@ -207,45 +235,60 @@ exports.updateCustomer = function(info)
                 "cardNumber" : info.cardNumber,
                 "expiry" : info.expiry
             });
-        cursor.then(function (user) {
-            deferred.resolve(user);
-        }).catch(function (error) {
-            deferred.reject(error);
+        cursor.then(function() {
+            callback(null, {
+                statusCode: 200,
+                error: null
+            });
+        }).catch(function(error) {
+            callback(null, {
+                statusCode: 500,
+                error: error
+            });
         });
     }, function (error) {
-        deferred.reject(error);
+        callback(null, {
+            statusCode: 500,
+            error: error
+        });
     });
-    return deferred.promise;
 };
 
 
-exports.searchCustomerInfo = function(info)
+exports.searchCustomerInfo = function(info,callback)
 {
     var deferred = Q.defer();
     var searchQuery = JSON.parse(info);
     var searchQuery = _sanitizeCustomerSearchInput(searchQuery);
-    console.log("Query for searching is :"+searchQuery);
     var customerList = [];
     var cursor = MongoDB.collection("users").find(searchQuery);
     if(cursor != null)
     {
         cursor.each(function (err, doc) {
             if (err) {
-                deferred.reject(err);
+                callback(null, {
+                    statusCode: 500,
+                    error: err
+                });
             }
             if (doc != null) {
                 customerList.push(doc);
             } else {
-                deferred.resolve(customerList);
+                callback(null, {
+                    statusCode: 200,
+                    error: null,
+                    data : customerList
+                });
             }
         });
     }
     else
     {
-        deferred.reject("There are no Advanced Search Records for Customers");
+        callback(null, {
+            statusCode: 500,
+            error: "Data not found"
+        });
     }
-
-    return deferred.promise;
 };
 
 _sanitizeCustomerSearchInput = function(info){

@@ -10,7 +10,8 @@ var Trips = require("./services/trips/tripshandler");
 var farmers = require("./services/farmers/farmerhandler.js");
 var Trucks = require("./services/trucks/truckshandler");
 var Product = require("./services/products/productshandler");
-
+var Customers = require("./services/customers/customershandler");
+var Admin = require("./services/admin/adminhandler");
 var connection = amqp.createConnection({host: "127.0.0.1"});
 
 MongoDB.connect(MongoDB.MONGODB_URL, function(){
@@ -22,7 +23,8 @@ connection.on("ready", function () {
 	listenToQueue(connection, "farmer_queue", farmers);
 	listenToQueue(connection, "trucks_queue", Trucks);
 	listenToQueue(connection, "products_queue", Product);
-
+	listenToQueue(connection,"customers_queue",Customers);
+	listenToQueue(connection,"admin_queue",Admin);
 });
 
 var listenToQueue = function (connection, queueName, Handler) {
