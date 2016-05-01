@@ -23,8 +23,15 @@ exports.handleRequest = function (message, callback) {
 			break;
 		case "getproductinfo":
 			exports.getproductinfo(message.productID, callback);
-
-
+			break;
+		case "delete_product":
+			exports.delete(message.productID, callback);
+			break;
+		default:
+			callback("Bad Request", {
+				statusCode: 400,
+				error: "Bad Request!"
+			});
 	}
 }
 
@@ -75,7 +82,6 @@ exports.setProductPrice = function (productId, price) {
 exports.createproduct = function (info, user, callback) {
 	var productID = Crypto.createHash('sha1').update(info.productName + user.ssn + new Date().getTime()).digest('hex');
 	info.productID = productID;
-	var deferred = Q.defer();
 	if (UserTypes.FARMER == user.usertype) {
 		var isValid = _validateProductInfo(info);
 		if (isValid) {
@@ -103,13 +109,11 @@ exports.createproduct = function (info, user, callback) {
 		}
 	} else {
 		//deferred.reject("Not a farmer!");
-		callback("All values must be provided!", {
+		callback("Not a farmer!", {
 			statusCode: 500,
-			error: "All values must be provided!"
+			error: "Not a farmer!"
 		});
-
 	}
-
 };
 
 /**
@@ -126,7 +130,9 @@ exports.delete = function (productID) {
 			deferred.reject(err);
 		}
 		if (numberOfRemoved.result.n) {
-			deferred.resolve();
+			redis.del(productID, function () {
+				deferred.resolve();
+			});
 		} else {
 			deferred.reject("Product with given ID not found in system!");
 		}
@@ -139,7 +145,6 @@ exports.delete = function (productID) {
  * @returns {*|promise}
  */
 exports.listallproducts = function (message,callback) {
-	var deferred = Q.defer();
 	var productList = [];
 	var cursor = MongoDB.collection("products").find({
 		isApproved: true
@@ -179,22 +184,52 @@ exports.listallproducts = function (message,callback) {
  *  function to get a single product .
  * @returns {*|promise}
  */
-exports.getproductinfo = function (productID) {
-	var deferred = Q.defer();
-	var product = MongoDB.collection("products").findOne({"productID": productID, isApproved: true},
-		function (err, doc) {
-			if (err) {
-				deferred.reject(err);
+exports.getproductinfo = function (productID, callback) {
+	redis.get(productID, function (error, reply) {
+		if(error) {
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
+		} else {
+			if(reply) {
+				callback(null, {
+					statusCode: 200,
+					response: JSON.parse(reply)
+				});
+			} else {
+				var product = null;
+				var cursor = MongoDB.collection("products").find({
+					productID: productID
+				});
+				cursor.each(function (error, doc) {
+					if (error) {
+						callback(error, {
+							statusCode: 500,
+							error: error
+						});
+					}
+					if (doc != null) {
+						product = doc;
+					} else {
+						if (product === null) {
+							callback("Product with given ID not found!", {
+								statusCode: 500,
+								error: "Product with given ID not found!"
+							});
+						} else {
+							redis.set(productID, JSON.stringify(product), function () {
+								callback(null, {
+									statusCode: 200,
+									response: product
+								});
+							});
+						}
+					}
+				});
 			}
-			if (doc != null) {
-				product = doc;
-				deferred.resolve(product);
-			}
-			else {
-				deferred.reject("There are no Records for product");
-			}
-		});
-	return deferred.promise;
+		}
+	});
 };
 
 /**
