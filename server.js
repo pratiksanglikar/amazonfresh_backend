@@ -10,6 +10,9 @@ var Trips = require("./services/trips/tripshandler");
 var farmers = require("./services/farmers/farmerhandler.js");
 var Trucks = require("./services/trucks/truckshandler");
 var Product = require("./services/products/productshandler");
+var Bill = require("./services/bills/billshandler");
+
+
 var Customers = require("./services/customers/customershandler");
 var Admin = require("./services/admin/adminhandler");
 var connection = amqp.createConnection({host: "127.0.0.1"});
@@ -25,6 +28,7 @@ connection.on("ready", function () {
 	listenToQueue(connection, "products_queue", Product);
 	listenToQueue(connection,"customers_queue",Customers);
 	listenToQueue(connection,"admin_queue",Admin);
+	listenToQueue(connection, "bills_queue", Bill);
 });
 
 var listenToQueue = function (connection, queueName, Handler) {
