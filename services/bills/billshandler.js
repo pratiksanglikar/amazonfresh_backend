@@ -7,8 +7,26 @@ var TripHandler = require("../trips/tripshandler");
 var Mysql = require("../commons/mysqlhandler");
 var ProductHandler = require("../products/productshandler");
 
+exports.handleRequest = function (message, callback) {
+    switch (message.type){
 
-exports.generatebill = function (info,customerSSN) {
+        case "revenue":
+            exports.revenue( callback);
+            break;
+        case "generatebill":
+            exports.generatebill( message, callback);
+            break;
+        default:
+            callback("Bad Request", {
+                statusCode: 400,
+                error: "Bad Request!"
+            });
+    }
+}
+
+exports.generatebill = function (message, callback) {
+    info = message.info;
+    customerSSN = message.customerSSN;
     var dynamicPricingPromise = [];
     var deferred = Q.defer();
     //var customer_id = ;
@@ -33,6 +51,7 @@ exports.generatebill = function (info,customerSSN) {
             }
             var tripResult = [];
             Q.all(getTripIdPromise).done(function (tripResult) {
+                tripResult = tripResult.response;
                 for (var i=0; i<tripResult.length; i++) {
                     tripId = tripResult[i].tripID;
                     //expectedDeliveryDate = new Date(tripResult.deliveryTime).toISOString().slice(0, 19).replace('T', ' ');
@@ -75,6 +94,7 @@ exports.generatebill = function (info,customerSSN) {
 
     return deferred.promise;
 }
+
 exports.delete = function (billId) {
     var deferred = Q.defer();
     var promise = Mysql.executeQuery("DELETE FROM bill WHERE bill_id=" + billId + ";");
@@ -168,18 +188,23 @@ exports.getallbillsadmin = function () {
 
 };
 
-exports.revenue = function () {
-    console.log("itha ala")
+exports.revenue = function ( callback) {
     var deferred = Q.defer();
     var sqlQuery = "SELECT order_date as date, SUM(total_amount) as revenue " +
         "FROM bill GROUP BY CAST(order_date AS DATE);";
     var promise = Mysql.executeQuery(sqlQuery);
-    promise.done( function(rows){
-        deferred.resolve(rows);
+    promise.done( function (rows) {
+        callback(null,{
+            statusCode: 200,
+            response: rows
+        });
     }, function (error) {
-        deferred.reject(error);
+        callback(error, {
+            statusCode: 500,
+            error: error
+        });
     });
-    return deferred.promise;
+    //return deferred.promise;
 };
 
 
