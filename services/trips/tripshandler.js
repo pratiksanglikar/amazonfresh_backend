@@ -10,6 +10,8 @@ var MongoDB = require("../commons/mongodbhandler");
 var UserTypes = require("../commons/constants").usertypes;
 var GoogleMaps = require("../commons/googlemapshandler");
 var Crypto = require("crypto");
+var redisClient = require('redis').createClient;
+var redis = redisClient(6379, 'localhost');
 
 
 exports.handleRequest = function (message, callback) {
@@ -131,29 +133,47 @@ exports.findTripsByDeliveryCity = function (city) {
  * @returns {*|promise}
  */
 exports.findTripById = function (tripID, callback) {
-	var trip = null;
-	var cursor = MongoDB.collection("trips").find({
-		tripID: tripID
-	});
-	cursor.each(function (error, doc) {
-		if (error) {
+	redis.get(tripID, function (error, reply) {
+		if(error) {
 			callback(error, {
 				statusCode: 500,
 				error: error
 			});
-		}
-		if (doc != null) {
-			trip = doc;
 		} else {
-			if (trip === null) {
-				callback("Trip with given ID not found!", {
-					statusCode: 500,
-					error: "Trip with given ID not found!"
-				});
-			} else {
+			if(reply) {
 				callback(null, {
 					statusCode: 200,
-					response: trip
+					response: JSON.parse(reply)
+				});
+			} else {
+				var trip = null;
+				var cursor = MongoDB.collection("trips").find({
+					tripID: tripID
+				});
+				cursor.each(function (error, doc) {
+					if (error) {
+						callback(error, {
+							statusCode: 500,
+							error: error
+						});
+					}
+					if (doc != null) {
+						trip = doc;
+					} else {
+						if (trip === null) {
+							callback("Trip with given ID not found!", {
+								statusCode: 500,
+								error: "Trip with given ID not found!"
+							});
+						} else {
+							redis.set(tripID, JSON.stringify(trip), function () {
+								callback(null, {
+									statusCode: 200,
+									response: trip
+								});
+							});
+						}
+					}
 				});
 			}
 		}

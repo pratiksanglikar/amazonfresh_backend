@@ -6,6 +6,8 @@ var Utilities = require("../commons/utilities");
 var Q = require("q");
 var UserTypes = require("../commons/constants").usertypes;
 var Crypto = require("crypto");
+var redisClient = require('redis').createClient;
+var redis = redisClient(6379, 'localhost');
 
 
 exports.adjustDynamicPrice = function (productId, count, productPrice) {
