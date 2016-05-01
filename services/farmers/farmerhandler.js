@@ -9,7 +9,25 @@ var Q = require("q");
 var UserTypes = require("../commons/constants").usertypes;
 var GoogleMaps = require("../commons/googlemapshandler");
 
-exports.createfarmer = function (info) {
+
+exports.handleRequest = function (message, callback) {
+    switch (message.type){
+        case "createfarmer":
+            exports.createfarmer(message.data, callback);
+            break;
+        case "getFarmerInfo":
+            exports.getFarmerInfo(message.ssn, callback);
+            break;
+        case "deletefarmer":
+                     exports.delete(message.data, callback);
+            break;
+        case "updatefarmer":
+            exports.updateFarmer(message.data, callback);
+    }
+}
+
+
+exports.createfarmer = function (info, callback) {
     var deferred = Q.defer();
 	var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
 	var promise1 = GoogleMaps.getLatLang(address);
@@ -19,14 +37,26 @@ exports.createfarmer = function (info) {
 		info.location = values[1];
         var cursor = MongoDB.collection("users").insert(info);
         cursor.then(function (user) {
-            deferred.resolve(user);
-        }).catch(function (error) {
-            deferred.reject(error);
+            callback(null, {
+                statusCode: 200,
+                response: "Here it is"
+            });
+            //deferred.resolve(user);
+        }).catch(function (err) {
+            callback(err, {
+                statusCode: 500,
+                error: err
+            });
+           // deferred.reject(error);
         });
-    }, function (error) {
-        deferred.reject(error);
+    }, function (err) {
+        callback(err, {
+            statusCode: 500,
+            error: err
+        });
+        //deferred.reject(error);
     });
-    return deferred.promise;
+    //return deferred.promise;
 };
 
 exports.delete = function (ssn) {
@@ -64,25 +94,41 @@ exports.getAllFarmers = function () {
     return deferred.promise;
 };
 
-exports.getFarmerInfo = function (ssn) {
-    var deferred = Q.defer();
+exports.getFarmerInfo = function (ssn,callback) {
+   // var deferred = Q.defer();
+    console.log("Done here again");
     var cursor = MongoDB.collection("users").find({"ssn": ssn});
     var farmerList = null;
     cursor.each(function (err, doc) {
         if (err) {
-            deferred.reject(err);
+            callback(err, {
+                statusCode: 500,
+                error: err
+            });
+            //deferred.reject(err);
         }
         if (doc != null) {
             farmerList = doc;
         } else {
             if (farmerList) {
-                deferred.resolve(farmerList);
+                console.log("here coming ggg");
+                console.log(farmerList);
+                callback(null, {
+                    statusCode: 200,
+                    response: farmerList
+                });
+
+              //  deferred.resolve(farmerList);
             } else {
-                deferred.reject("Farmer not found!");
+                callback(err, {
+                    statusCode: 500,
+                    error: err
+                });
+               // deferred.reject("Farmer not found!");
             }
         }
     });
-    return deferred.promise;
+    //return deferred.promise;
 };
 
 exports.farmerViewInfo = function(info)
@@ -131,7 +177,9 @@ exports.searchFarmerInfo = function(info)
     return deferred.promise;
 };
 
-exports.updateFarmer = function (info) {
+exports.updateFarmer = function (info,callback) {
+    console.log("Updating");
+    console.log(info);
     var deferred = Q.defer();
     var promise = _validateFarmerInfo1(info);
     promise.done(function () {
@@ -154,14 +202,29 @@ exports.updateFarmer = function (info) {
                 "location" : info.location
             });
         cursor.then(function (user) {
-            deferred.resolve(user);
-        }).catch(function (error) {
-            deferred.reject(error);
+            console.log("Frome first");
+            callback(null, {
+                statusCode: 200,
+                response: ""
+            });
+          //  deferred.resolve(user);
+        }).catch(function (err) {
+            console.log("Frome 2nd" + err);
+            callback(err, {
+                statusCode: 500,
+                error: err
+            });
+          //  deferred.reject(error);
         });
-    }, function (error) {
-        deferred.reject(error);
+    }, function (err) {
+        console.log("Frome 4nd");
+        callback(err, {
+            statusCode: 500,
+            error: err
+        });
+       // deferred.reject(error);
     });
-    return deferred.promise;
+    //return deferred.promise;
 };
 
 _sanitizeFarmerInfo = function (info) {
