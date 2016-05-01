@@ -21,6 +21,9 @@ exports.handleRequest = function (message, callback) {
         case "deletefarmer":
                      exports.delete(message.data, callback);
             break;
+        case "searchfarmer":
+            exports.searchFarmerInfo(message.data, callback);
+            break;
         case "updatefarmer":
             exports.updateFarmer(message.data, callback);
     }
@@ -150,31 +153,47 @@ exports.farmerViewInfo = function(info)
     return deferred.promise;
 };
 
-exports.searchFarmerInfo = function(info)
+exports.searchFarmerInfo = function(info,callback)
 {
-    var deferred = Q.defer();
+   // var deferred = Q.defer();
     var searchQuery = JSON.parse(info);
     var searchQuery = _validateSearchInput(searchQuery);
+    console.log("Query is" + searchQuery);
     var farmerList = [];
     var cursor = MongoDB.collection("users").find(searchQuery);
     if(cursor != null)
     {
         cursor.each(function (err, doc) {
             if (err) {
-                deferred.reject(err);
+                callback(err, {
+                    statusCode: 500,
+                    error: err
+                });
+                //deferred.reject(err);
             }
             if (doc != null) {
                 farmerList.push(doc);
-            } else {
-                deferred.resolve(farmerList);
+            }
+            else
+            {
+                callback(null, {
+                statusCode: 200,
+                response: farmerList
+            });
+
+              //  deferred.resolve(farmerList);
             }
         });
     }
     else
     {
-        deferred.reject("There are no Advanced Search Records for Farmers");
+        callback(err, {
+            statusCode: 500,
+            error: err
+        });
+        //deferred.reject("There are no Advanced Search Records for Farmers");
     }
-    return deferred.promise;
+    //return deferred.promise;
 };
 
 exports.updateFarmer = function (info,callback) {
