@@ -61,7 +61,7 @@ exports.createfarmer = function (info, callback) {
     });
     //return deferred.promise;
 };
-
+/*
 exports.delete = function (ssn) {
     console.log("ssn is " + ssn);
        var deferred = Q.defer();
@@ -97,9 +97,9 @@ exports.getAllFarmers = function () {
     return deferred.promise;
 };
 
+*/
 exports.getFarmerInfo = function (ssn,callback) {
    // var deferred = Q.defer();
-    console.log("Done here again");
     var cursor = MongoDB.collection("users").find({"ssn": ssn});
     var farmerList = null;
     cursor.each(function (err, doc) {
