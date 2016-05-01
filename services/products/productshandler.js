@@ -82,6 +82,7 @@ exports.setProductPrice = function (productId, price) {
 exports.createproduct = function (info, user, callback) {
 	var productID = Crypto.createHash('sha1').update(info.productName + user.ssn + new Date().getTime()).digest('hex');
 	info.productID = productID;
+	var deferred = Q.defer();
 	if (UserTypes.FARMER == user.usertype) {
 		var isValid = _validateProductInfo(info);
 		if (isValid) {
@@ -109,9 +110,9 @@ exports.createproduct = function (info, user, callback) {
 		}
 	} else {
 		//deferred.reject("Not a farmer!");
-		callback("Not a farmer!", {
+		callback("All values must be provided!", {
 			statusCode: 500,
-			error: "Not a farmer!"
+			error: "All values must be provided!"
 		});
 	}
 };
@@ -145,6 +146,7 @@ exports.delete = function (productID) {
  * @returns {*|promise}
  */
 exports.listallproducts = function (message,callback) {
+	var deferred = Q.defer();
 	var productList = [];
 	var cursor = MongoDB.collection("products").find({
 		isApproved: true
