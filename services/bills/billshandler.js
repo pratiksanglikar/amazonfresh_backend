@@ -6,6 +6,7 @@ var Q = require("q");
 var TripHandler = require("../trips/tripshandler");
 var Mysql = require("../commons/mysqlhandler");
 var ProductHandler = require("../products/productshandler");
+var MongoDB = require("../commons/mongodbhandler");
 
 exports.handleRequest = function (message, callback) {
     switch (message.type){
@@ -15,6 +16,9 @@ exports.handleRequest = function (message, callback) {
             break;
         case "generatebill":
             exports.generatebill( message, callback);
+            break;
+        case "addrating":
+            exports.addrating( message, callback);
             break;
         default:
             callback("Bad Request", {
@@ -47,11 +51,10 @@ exports.generatebill = function (message, callback) {
                 var product_id = info.product_details[key].product_id;
                 tempPromise = TripHandler.generateTrip(customerSSN, info.product_details[key].farmer_id, product_id);
                 getTripIdPromise.push(tempPromise);
-
             }
             var tripResult = [];
             Q.all(getTripIdPromise).done(function (tripResult) {
-                tripResult = tripResult.response;
+               //tripResult = tripResult.response;
                 for (var i=0; i<tripResult.length; i++) {
                     tripId = tripResult[i].tripID;
                     //expectedDeliveryDate = new Date(tripResult.deliveryTime).toISOString().slice(0, 19).replace('T', ' ');
@@ -76,24 +79,93 @@ exports.generatebill = function (message, callback) {
 
                 });
             }, function (error) {
-                deferred.reject(error);
+                callback(error, {
+                    statusCode: 500,
+                    error: error
+                });
             })
         }, function (error) {
-            deferred.reject(error);
+            callback(error, {
+                statusCode: 500,
+                error: error
+            });
         })
         Q.all(insertInItemPromise).done(function () {
-            deferred.resolve()
+            callback(null,{
+                statusCode: 200
+            });
         }, function (error) {
-            deferred.reject(error);
+            callback(error, {
+                statusCode: 500,
+                error: error
+            });
         })
     }, function (error) {
-        deferred.reject(error);
+        callback(error, {
+            statusCode: 500,
+            error: error
+        });
     })
 
     //
 
-    return deferred.promise;
+   // return deferred.promise;
 }
+
+exports.addrating = function (message, callback) {
+    //var deferred = Q.defer();
+    info = message.info;
+    var cursor = MongoDB.collection("products").find({"productID" : info.product_id});
+    cursor.each(function (error, doc) {
+        if (error) {
+                callback(error, {
+                    statusCode: 500,
+                    error: error
+                });
+        }
+        if (doc != null) {
+            var setnumberOfRatings = doc.numberOfRatings + 1;
+            var setrating = ((doc.rating*doc.numberOfRatings) + Number(info.rating))/setnumberOfRatings;
+            var cursor = MongoDB.collection("products").update({"productID" : info.product_id},{$set : {"rating" : setrating, "numberOfRatings" :  setnumberOfRatings}});
+            cursor.then(function () {
+                callback(null,{
+                    statusCode: 200
+                });
+            }).catch(function (error) {
+                callback(error, {
+                    statusCode: 500,
+                    error: error
+                });
+            });
+        }
+        else {
+            callback("Error",{
+                statusCode: 500,
+                error: "Error"
+            });
+        }
+    });
+    //return deferred.promise;
+}
+
+exports.revenue = function ( callback) {
+    var deferred = Q.defer();
+    var sqlQuery = "SELECT order_date as date, SUM(total_amount) as revenue " +
+        "FROM bill GROUP BY CAST(order_date AS DATE);";
+    var promise = Mysql.executeQuery(sqlQuery);
+    promise.done( function (rows) {
+        callback(null,{
+            statusCode: 200,
+            response: rows
+        });
+    }, function (error) {
+        callback(error, {
+            statusCode: 500,
+            error: error
+        });
+    });
+    //return deferred.promise;
+};
 
 exports.delete = function (billId) {
     var deferred = Q.defer();
@@ -119,94 +191,6 @@ exports.searchbill = function (billId) {
     });
     return deferred.promise;
 };
-
-/**
- * searches all bills with given customer id.
- */
-exports.getallbills = function (customerId) {
-    var deferred = Q.defer();
-    var result = {};
-    var getJoinPromise = Mysql.executeQuery("SELECT * FROM bill, item Where bill.customer_id = '" + customerId + "' AND bill.bill_id = item.bill_id ;");
-    getJoinPromise.done(function(joinResult){
-        for(var i=0 ; i < joinResult.length ; i++){
-            if(!result[joinResult[i].bill_id]) {
-                result[joinResult[i].bill_id] = {};
-                result[joinResult[i].bill_id].bill_id = joinResult[i].bill_id;
-                result[joinResult[i].bill_id].order_date = joinResult[i].order_date;
-                result[joinResult[i].bill_id].total_amount = joinResult[i].total_amount;
-                result[joinResult[i].bill_id].item_details = [];
-            }
-            result[joinResult[i].bill_id].item_details.push({
-                "trip_id" : joinResult[i].trip_id,
-                "product_id" : joinResult[i].product_id,
-                "quantity" : joinResult[i].quantity,
-                "price_per_unit" : joinResult[i].price_per_unit,
-                // "trip_id" : joinResult[i].trip_id,
-                "expected_delivery_date" : joinResult[i].expected_delivery_date,
-                "product_name" : joinResult[i].product_name,
-                "product_image_url" : joinResult[i].product_image_url
-            });
-        }
-        deferred.resolve(result);
-    }, function (error) {
-        deferred.reject(error);
-    });
-    return deferred.promise;
-
-};
-
-exports.getallbillsadmin = function () {
-    var deferred = Q.defer();
-    var result = {};
-    var getJoinPromise = Mysql.executeQuery("SELECT * FROM bill, item Where bill.bill_id = item.bill_id ;");
-    getJoinPromise.done(function(joinResult){
-        for(var i=0 ; i < joinResult.length ; i++){
-            if(!result[joinResult[i].bill_id]) {
-                result[joinResult[i].bill_id] = {};
-                result[joinResult[i].bill_id].bill_id = joinResult[i].bill_id;
-                result[joinResult[i].bill_id].order_date = joinResult[i].order_date;
-                result[joinResult[i].bill_id].total_amount = joinResult[i].total_amount;
-                result[joinResult[i].bill_id].customer_id = joinResult[i].customer_id;
-                result[joinResult[i].bill_id].item_details = [];
-            }
-            result[joinResult[i].bill_id].item_details.push({
-                "trip_id" : joinResult[i].trip_id,
-                "product_id" : joinResult[i].product_id,
-                "quantity" : joinResult[i].quantity,
-                "price_per_unit" : joinResult[i].price_per_unit,
-                "trip_id" : joinResult[i].trip_id,
-                "expected_delivery_date" : joinResult[i].expected_delivery_date,
-                "product_name" : joinResult[i].product_name,
-                "product_image_url" : joinResult[i].product_image_url
-            });
-        }
-        deferred.resolve(result);
-    }, function (error) {
-        deferred.reject(error);
-    });
-    return deferred.promise;
-
-};
-
-exports.revenue = function ( callback) {
-    var deferred = Q.defer();
-    var sqlQuery = "SELECT order_date as date, SUM(total_amount) as revenue " +
-        "FROM bill GROUP BY CAST(order_date AS DATE);";
-    var promise = Mysql.executeQuery(sqlQuery);
-    promise.done( function (rows) {
-        callback(null,{
-            statusCode: 200,
-            response: rows
-        });
-    }, function (error) {
-        callback(error, {
-            statusCode: 500,
-            error: error
-        });
-    });
-    //return deferred.promise;
-};
-
 
 function _getOrder(billId){
     var deferred = Q.defer();

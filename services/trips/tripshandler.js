@@ -2,7 +2,7 @@
  * Created by pratiksanglikar on 19/04/16.
  */
 
-var q = require("q");
+var Q = require("q");
 var CustomerHandler = require("../customers/customershandler");
 var FarmerHandler = require("../farmers/farmerhandler");
 var ProductHandler = require("../products/productshandler");
@@ -212,11 +212,12 @@ exports.getAllTrips = function (message, callback) {
  * @param productID
  */
 exports.generateTrip = function (customerID, farmerID, productID, callback) {
+	var deferred = 	Q.defer();
 	var customerPromise = CustomerHandler.getCustomer(customerID);
-	var farmerPromise = FarmerHandler.getFarmerInfo(farmerID);
+	var farmerPromise = FarmerHandler.getFarmerInfo(farmerID );
 	var productPromise = ProductHandler.getproductinfo(productID);
 
-	q.all([customerPromise, farmerPromise, productPromise]).done(function (values) {
+	Q.all([customerPromise, farmerPromise, productPromise]).done(function (values) {
 		var customer = values[0],
 			farmer = values[1],
 			product = values[2];
@@ -229,40 +230,59 @@ exports.generateTrip = function (customerID, farmerID, productID, callback) {
 				cursor.then(function () {
 					var updateDriver = MongoDB.collection("users").update({ssn: driver.ssn}, {$set: {freeFrom: tripDetails.deliveryTime}});
 					updateDriver.then(function () {
-						callback(null,{
-							statusCode: 200,
-							response: tripDetails
-						});
+						deferred.resolve(tripDetails);
+						if(callback) {
+							callback(null,{
+								statusCode: 200,
+								response: tripDetails
+							});
+						}
 					}).catch(function (error) {
+						deferred.reject(error);
+						if(callback) {
+							callback(error, {
+								statusCode: 500,
+								error: error
+							});
+						}
+					});
+				}).catch(function (error) {
+					deferred.reject(error);
+					if(callback) {
 						callback(error, {
 							statusCode: 500,
 							error: error
 						});
-					});
-				}).catch(function (error) {
+					}
+				});
+			}, function (error) {
+				deferred.reject(error);
+				if(callback) {
 					callback(error, {
 						statusCode: 500,
 						error: error
 					});
-				});
-			}, function (error) {
+				}
+			});
+		}, function (error) {
+			deferred.reject(error);
+			if(callback) {
 				callback(error, {
 					statusCode: 500,
 					error: error
 				});
-			});
-		}, function (error) {
+			}
+		});
+	}, function (error) {
+		deferred.reject(error);
+		if(callback) {
 			callback(error, {
 				statusCode: 500,
 				error: error
 			});
-		});
-	}, function (error) {
-		callback(error, {
-			statusCode: 500,
-			error: error
-		});
+		}
 	});
+	return deferred.promise;
 };
 
 /**
@@ -313,7 +333,7 @@ _constructTripDetails = function (customer, farmer, product, journeyDetails, dri
  * @private
  */
 _findFreeDriver = function () {
-	var deferred = q.defer();
+	var deferred = Q.defer();
 	var cursor = MongoDB.collection("users").find({
 		"usertype": UserTypes.DRIVER,
 		"isApproved": true,

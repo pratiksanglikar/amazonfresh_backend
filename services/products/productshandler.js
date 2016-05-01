@@ -201,18 +201,25 @@ exports.listallproducts = function (message,callback) {
  * @returns {*|promise}
  */
 exports.getproductinfo = function (productID, callback) {
+	var deferred = Q.defer();
 	redis.get(productID, function (error, reply) {
 		if(error) {
-			callback(error, {
-				statusCode: 500,
-				error: error
-			});
+			deferred.reject(error);
+			if(callback) {
+				callback(error, {
+					statusCode: 500,
+					error: error
+				});
+			}
 		} else {
 			if(reply) {
-				callback(null, {
-					statusCode: 200,
-					response: JSON.parse(reply)
-				});
+				deferred.resolve(JSON.parse(reply));
+				if(callback) {
+					callback(null, {
+						statusCode: 200,
+						response: JSON.parse(reply)
+					});
+				}
 			} else {
 				var product = null;
 				var cursor = MongoDB.collection("products").find({
@@ -220,25 +227,34 @@ exports.getproductinfo = function (productID, callback) {
 				});
 				cursor.each(function (error, doc) {
 					if (error) {
-						callback(error, {
-							statusCode: 500,
-							error: error
-						});
+						deferred.reject(error);
+						if(callback) {
+							callback(error, {
+								statusCode: 500,
+								error: error
+							});
+						}
 					}
 					if (doc != null) {
 						product = doc;
 					} else {
 						if (product === null) {
-							callback("Product with given ID not found!", {
-								statusCode: 500,
-								error: "Product with given ID not found!"
-							});
+							deferred.reject("Product with given ID not found!");
+							if(callback) {
+								callback("Product with given ID not found!", {
+									statusCode: 500,
+									error: "Product with given ID not found!"
+								});
+							}
 						} else {
 							redis.set(productID, JSON.stringify(product), function () {
-								callback(null, {
-									statusCode: 200,
-									response: product
-								});
+								deferred.resolve(product);
+								if(callback) {
+									callback(null, {
+										statusCode: 200,
+										response: product
+									});
+								}
 							});
 						}
 					}
@@ -246,6 +262,7 @@ exports.getproductinfo = function (productID, callback) {
 			}
 		}
 	});
+	return deferred.promise;
 };
 
 /**

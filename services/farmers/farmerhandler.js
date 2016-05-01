@@ -103,16 +103,19 @@ exports.getAllFarmers = function () {
 
 */
 exports.getFarmerInfo = function (ssn,callback) {
-   // var deferred = Q.defer();
+
+    var deferred = Q.defer();
     var cursor = MongoDB.collection("users").find({"ssn": ssn});
     var farmerList = null;
     cursor.each(function (err, doc) {
         if (err) {
-            callback(err, {
-                statusCode: 500,
-                error: err
-            });
-            //deferred.reject(err);
+            if(callback){
+                callback(err, {
+                    statusCode: 500,
+                    error: err
+                });
+            }
+            deferred.reject(err);
         }
         if (doc != null) {
             farmerList = doc;
@@ -120,22 +123,25 @@ exports.getFarmerInfo = function (ssn,callback) {
             if (farmerList) {
                 console.log("here coming ggg");
                 console.log(farmerList);
-                callback(null, {
-                    statusCode: 200,
-                    response: farmerList
-                });
-
-              //  deferred.resolve(farmerList);
+                deferred.resolve(farmerList);
+                if(callback) {
+                    callback(null, {
+                        statusCode: 200,
+                        response: farmerList
+                    });
+                }
             } else {
-                callback(err, {
-                    statusCode: 500,
-                    error: err
-                });
-               // deferred.reject("Farmer not found!");
+                if(callback) {
+                    callback(err, {
+                        statusCode: 500,
+                        error: err
+                    });
+                }
+                deferred.reject("Farmer not found!");
             }
         }
     });
-    //return deferred.promise;
+    return deferred.promise;
 };
 
 exports.farmerViewInfo = function(info,callback)
