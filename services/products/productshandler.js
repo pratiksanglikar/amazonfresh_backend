@@ -27,6 +27,20 @@ exports.handleRequest = function (message, callback) {
 		case "delete_product":
 			exports.delete(message.productID, callback);
 			break;
+
+		case "product_viewInfo":
+			exports.searchByProductId(message.data, callback);
+			break;
+
+		case "advanced_search_product":
+			exports.searchProductInfo(message.data, callback);
+			break;
+
+		case "update_products":
+			console.log("In update products");
+			exports.updateproduct(message.data, callback);
+			break;
+
 		default:
 			callback("Bad Request", {
 				statusCode: 400,
@@ -238,7 +252,7 @@ exports.getproductinfo = function (productID, callback) {
  * function to get a single product .
  * @returns {*|promise}
  */
-exports.searchProductInfo = function (info) {
+exports.searchProductInfo = function (info,callback) {
 	var deferred = Q.defer();
 	var searchQuery = JSON.parse(info);
 	var searchQuery = _sanitizeProductSearchInput(searchQuery);
@@ -247,19 +261,27 @@ exports.searchProductInfo = function (info) {
 	if (cursor != null) {
 		cursor.each(function (err, doc) {
 			if (err) {
-				deferred.reject(err);
+				callback(err, {
+					statusCode: 500,
+					error: err
+				});
 			}
 			if (doc != null) {
 				productList.push(doc);
 			} else {
-				deferred.resolve(productList);
+				callback(null, {
+					statusCode: 200,
+					data: productList
+				});
 			}
 		});
 	}
 	else {
-		deferred.reject("There are no Advanced Search Records for Products");
+		callback(null, {
+			statusCode: 500,
+			error: "Product Not found"
+		});
 	}
-	return deferred.promise;
 };
 
 _sanitizeProductSearchInput = function (info) {
@@ -278,22 +300,27 @@ _sanitizeProductSearchInput = function (info) {
 	return info;
 };
 
-exports.searchByProductId = function (info) {
+exports.searchByProductId = function (info,callback) {
 	var deferred = Q.defer();
 	var info = JSON.parse(info);
 	var cursor = MongoDB.collection("products").find({"productID": info.productID, isApproved: true});
 	var productList = {};
 	cursor.each(function (err, doc) {
 		if (err) {
-			deferred.reject(err);
+			callback(err, {
+				statusCode: 500,
+				error: err
+			});
 		}
 		if (doc != null) {
 			productList = doc;
 		} else {
-			deferred.resolve(productList);
+			callback(null, {
+				statusCode: 200,
+				data: productList
+			});
 		}
 	});
-	return deferred.promise;
 };
 
 exports.searchproduct = function (productName) {
@@ -315,10 +342,10 @@ exports.searchproduct = function (productName) {
 	return deferred.promise;
 };
 
-exports.updateproduct = function (info) {
+exports.updateproduct = function (info,callback) {
 	var deferred = Q.defer();
-	var promise = _validateProductInfo(info);
-	promise.done(function () {
+	//var promise = _validateProductInfo(info);
+	console.log("Info is "+info);
 		var cursor = MongoDB.collection("products").update({"productID": info.productID},
 			{
 				"productID": info.productID,
@@ -332,15 +359,18 @@ exports.updateproduct = function (info) {
 				"reviews": info.reviews,
 				"isApproved": info.isApproved
 			});
-		cursor.then(function (user) {
-			deferred.resolve(user);
+		cursor.then(function () {
+			console.log("updated in backend");
+			callback(null, {
+				statusCode: 200,
+				error : null
+			});
 		}).catch(function (error) {
-			deferred.reject(error);
+			callback(error, {
+				statusCode: 500,
+				error : error
+			});
 		});
-	}, function (error) {
-		deferred.reject(error);
-	});
-	return deferred.promise;
 };
 
 /**
@@ -367,14 +397,13 @@ _sanitizeProductInfo = function (info, user) {
  * @returns {*|promise}
  * @private
  */
+/*
 _validateProductInfo = function (info) {
 	if (
-		Utilities.isEmpty(info.productName) ||
-		Utilities.isEmpty(info.productPrice) ||
-		Utilities.isEmpty(info.description)) {
+		Utilities.isEmpty(info.productName) || Utilities.isEmpty(info.productPrice) || Utilities.isEmpty(info.description)) {
 		return false;
 	}
 	else {
 		return true;
 	}
-};
+};*/

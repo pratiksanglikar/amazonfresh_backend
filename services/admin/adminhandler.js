@@ -31,8 +31,13 @@ exports.handleRequest = function (message, callback) {
             break;
 
         case "getUnapprovedFarmers":
-            exports.getAllUnApprovedFarmers( callback);
+            exports.getAllUnApprovedFarmers(callback);
             break;
+
+        case "getUnapprovedProducts":
+            exports.getAllUnApprovedProducts(callback);
+            break;
+
     }
 }
 
@@ -142,22 +147,27 @@ exports.getAllUnApprovedFarmers = function(callback) {
 };
 
 
-exports.getAllUnApprovedProducts = function() {
+exports.getAllUnApprovedProducts = function(callback) {
     var deferred = Q.defer();
     var cursor = MongoDB.collection("products").find({ "isApproved": false });
     var productList = [];
     cursor.each(function (err, doc) {
         if (err) {
-            deferred.reject(err);
+            callback(err, {
+                statusCode: 500,
+                error: err
+            });
         }
         if (doc != null) {
             productList.push(doc);
         } else
         {
-            deferred.resolve(productList);
+            callback(null, {
+                statusCode: 200,
+                data : productList
+            });
         }
     });
-    return deferred.promise;
 };
 
 exports.getAllUnApprovedCustomers = function(callback) {

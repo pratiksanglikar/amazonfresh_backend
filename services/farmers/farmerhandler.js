@@ -26,6 +26,11 @@ exports.handleRequest = function (message, callback) {
             break;
         case "updatefarmer":
             exports.updateFarmer(message.data, callback);
+            break;
+
+        case "view_farmer":
+            exports.farmerViewInfo(message.data, callback);
+            break;
     }
 }
 
@@ -134,7 +139,7 @@ exports.getFarmerInfo = function (ssn,callback) {
     //return deferred.promise;
 };
 
-exports.farmerViewInfo = function(info)
+exports.farmerViewInfo = function(info,callback)
 {
     var deferred = Q.defer();
     var info = JSON.parse(info);
@@ -142,15 +147,20 @@ exports.farmerViewInfo = function(info)
     var farmerList = {};
     cursor.each(function (err, doc) {
         if (err) {
-            deferred.reject(err);
+            callback(err, {
+                statusCode: 500,
+                error: err
+            });
         }
         if (doc != null) {
             farmerList = doc;
         } else {
-            deferred.resolve(farmerList);
+            callback(null, {
+                statusCode: 200,
+                data: farmerList
+            });
         }
     });
-    return deferred.promise;
 };
 
 exports.searchFarmerInfo = function(info,callback)
@@ -178,7 +188,8 @@ exports.searchFarmerInfo = function(info,callback)
             {
                 callback(null, {
                 statusCode: 200,
-                response: farmerList
+                    err : null,
+                data: farmerList
             });
 
               //  deferred.resolve(farmerList);
