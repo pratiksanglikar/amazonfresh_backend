@@ -30,6 +30,7 @@ exports.handleRequest = function (message, callback) {
 			break;
 		case "trips_by_customer":
 			exports.getTripsByCustomer(message, callback);
+			break;
 	}
 }
 

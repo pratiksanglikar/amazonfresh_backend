@@ -61,7 +61,7 @@ exports.adjustDynamicPrice = function (productId, count, productPrice) {
     if(count == 10) {
 		promise = exports.setProductPrice(productId, productPrice * 1.10);
 	}
-	if(count == 50) {
+	if(count == 100) {
 		promise = exports.setProductPrice(productId, productPrice * 1.25);
 	}
 	if(count == 500) {
