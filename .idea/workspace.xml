@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f72cd700-05da-4559-92ce-e55ddef8ff60" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/trips/tripshandler.js" afterPath="$PROJECT_DIR$/services/trips/tripshandler.js" />
     </list>
     <ignored path="amazonfresh_backend.iws" />
@@ -28,15 +29,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="150" column="1" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
-              <folding>
-                <marker date="1462146332937" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/14/2016. ...*/" />
-                <marker date="1462146332937" expanded="true" signature="412:695" placeholder="{...}" />
-                <marker date="1462146332937" expanded="true" signature="439:695" placeholder="{...}" />
-                <marker date="1462146332937" expanded="true" signature="5666:5757" placeholder="{...}" />
-                <marker date="1462146332937" expanded="true" signature="5666:5767" placeholder="{...}" />
-                <marker date="1462146332937" expanded="true" signature="5666:5775" placeholder="{...}" />
-                <marker date="1462146332937" expanded="true" signature="5666:5996" placeholder="{...}" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -45,13 +38,15 @@
         <entry file="file://$PROJECT_DIR$/services/bills/billshandler.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
               <folding>
-                <element signature="e#6262#6764#0" expanded="false" />
-                <element signature="e#6802#7075#0" expanded="false" />
-                <element signature="e#7078#7124#0" expanded="false" />
-                <element signature="e#7164#7397#0" expanded="false" />
+                <element signature="e#6335#6837#0" expanded="false" />
+                <element signature="e#6875#7148#0" expanded="false" />
+                <element signature="e#7151#7197#0" expanded="false" />
+                <element signature="e#7237#7470#0" expanded="false" />
                 <element signature="n#!!block;n#_getOrder#0" expanded="false" />
+                <marker date="1462155818973" expanded="true" signature="0:41" placeholder="/** Created by Abhay on 4/16/2016. ...*/" />
+                <marker date="1462155818973" expanded="true" signature="6226:6241" placeholder="{&quot;statusCode&quot;: 500...}" />
               </folding>
             </state>
           </provider>
@@ -70,8 +65,8 @@
       <file leaf-file-name="tripshandler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5492126">
-              <caret line="301" column="70" selection-start-line="301" selection-start-column="70" selection-end-line="301" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.48195878">
+              <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -81,13 +76,15 @@
         <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="214" column="23" selection-start-line="214" selection-start-column="23" selection-end-line="214" selection-end-column="23" />
+              <caret line="213" column="16" selection-start-line="213" selection-start-column="16" selection-end-line="213" selection-end-column="16" />
               <folding>
-                <marker date="1462146332930" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
-                <marker date="1462146332930" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
-                <marker date="1462146332930" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
-                <marker date="1462146332930" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
-                <marker date="1462146332930" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+                <marker date="1462155819026" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
+                <marker date="1462155819026" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
+                <marker date="1462155819026" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
+                <marker date="1462155819026" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
+                <marker date="1462155819026" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+                <marker date="1462155819026" expanded="true" signature="9105:9183" placeholder="/** function to sanitize the provided input. ...*/" />
+                <marker date="1462155819026" expanded="true" signature="9465:9709" placeholder="/** function to validate the given input. ...*/" />
               </folding>
             </state>
           </provider>
@@ -107,11 +104,8 @@
         <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-              <folding>
-                <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-                <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-              </folding>
+              <caret line="101" column="7" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,6 +136,7 @@
         <option value="$PROJECT_DIR$/services/customers/customershandler.js" />
         <option value="$PROJECT_DIR$/services/products/productshandler.js" />
         <option value="$PROJECT_DIR$/services/bills/billshandler.js" />
+        <option value="$PROJECT_DIR$/services/admin/adminhandler.js" />
         <option value="$PROJECT_DIR$/services/trips/tripshandler.js" />
       </list>
     </option>
@@ -154,8 +149,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1064" />
+    <option name="width" value="1386" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -182,6 +177,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -228,14 +225,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="trips" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="bills" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -268,9 +281,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/services/farmers/farmerhandler.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/services/bills/billshandler.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/services/products/productshandler.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/services/trucks/truckshandler.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -452,27 +465,33 @@
       <option name="project" value="LOCAL" />
       <updated>1462096460489</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="ListAllProduct and create Product RabitMQ">
+      <created>1462149553293</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1462149553293</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="8209000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1064" extended-state="6" />
+    <frame x="-9" y="-9" width="1386" height="788" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16376123" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16320474" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32486188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32486188" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32366413" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32519084" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32486188" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32486188" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -501,7 +520,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/services/bills/billshandler.js</url>
-          <line>130</line>
+          <line>131</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
@@ -513,16 +532,80 @@
     <entry file="file://$PROJECT_DIR$/services/farmers/farmerhandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="150" column="1" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/bills/billshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
           <folding>
-            <marker date="1462146332937" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/14/2016. ...*/" />
-            <marker date="1462146332937" expanded="true" signature="412:695" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="439:695" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5757" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5767" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5775" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5996" placeholder="{...}" />
+            <element signature="e#6335#6837#0" expanded="false" />
+            <element signature="e#6875#7148#0" expanded="false" />
+            <element signature="e#7151#7197#0" expanded="false" />
+            <element signature="e#7237#7470#0" expanded="false" />
+            <element signature="n#!!block;n#_getOrder#0" expanded="false" />
+            <marker date="1462155818973" expanded="true" signature="0:41" placeholder="/** Created by Abhay on 4/16/2016. ...*/" />
+            <marker date="1462155818973" expanded="true" signature="6226:6241" placeholder="{&quot;statusCode&quot;: 500...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/commons/mongodbhandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="214" column="23" selection-start-line="214" selection-start-column="23" selection-end-line="214" selection-end-column="23" />
+          <folding>
+            <marker date="1462155819026" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
+            <marker date="1462155819026" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9105:9183" placeholder="/** function to sanitize the provided input. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9465:9709" placeholder="/** function to validate the given input. ...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/customers/customershandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="16" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/farmers/farmerhandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -530,10 +613,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-            <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -550,11 +630,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1462146332930" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
-            <marker date="1462146332930" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
+            <marker date="1462155819026" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9105:9183" placeholder="/** function to sanitize the provided input. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9465:9709" placeholder="/** function to validate the given input. ...*/" />
           </folding>
         </state>
       </provider>
@@ -578,10 +660,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-            <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -598,11 +677,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1462146332930" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
-            <marker date="1462146332930" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
+            <marker date="1462155819026" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9105:9183" placeholder="/** function to sanitize the provided input. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9465:9709" placeholder="/** function to validate the given input. ...*/" />
           </folding>
         </state>
       </provider>
@@ -626,10 +707,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-            <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -646,11 +724,13 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1462146332930" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
-            <marker date="1462146332930" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
+            <marker date="1462155819026" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9105:9183" placeholder="/** function to sanitize the provided input. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9465:9709" placeholder="/** function to validate the given input. ...*/" />
           </folding>
         </state>
       </provider>
@@ -674,10 +754,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-            <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -715,10 +792,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-            <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -764,30 +838,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding>
-            <marker date="1462133810023" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/24/2016. ...*/" />
-            <marker date="1462133810023" expanded="true" signature="5242:5245" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/farmers/farmerhandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="150" column="1" selection-start-line="150" selection-start-column="1" selection-end-line="150" selection-end-column="1" />
-          <folding>
-            <marker date="1462146332937" expanded="true" signature="0:47" placeholder="/** Created by SHAILESH-PC on 4/14/2016. ...*/" />
-            <marker date="1462146332937" expanded="true" signature="412:695" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="439:695" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5757" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5767" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5775" placeholder="{...}" />
-            <marker date="1462146332937" expanded="true" signature="5666:5996" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -802,13 +857,15 @@
     <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="214" column="23" selection-start-line="214" selection-start-column="23" selection-end-line="214" selection-end-column="23" />
+          <caret line="213" column="16" selection-start-line="213" selection-start-column="16" selection-end-line="213" selection-end-column="16" />
           <folding>
-            <marker date="1462146332930" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
-            <marker date="1462146332930" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
-            <marker date="1462146332930" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="2223:2300" placeholder="/** function to create product. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3365:3462" placeholder="/** deletes a driver with given ssn from the system. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="3895:3960" placeholder="/** function to list all products. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="4706:4779" placeholder="/** ...*/" />
+            <marker date="1462155819026" expanded="true" signature="6204:6273" placeholder="/** function to get a single product . ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9105:9183" placeholder="/** function to sanitize the provided input. ...*/" />
+            <marker date="1462155819026" expanded="true" signature="9465:9709" placeholder="/** function to validate the given input. ...*/" />
           </folding>
         </state>
       </provider>
@@ -824,21 +881,31 @@
     <entry file="file://$PROJECT_DIR$/services/bills/billshandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding>
-            <element signature="e#6262#6764#0" expanded="false" />
-            <element signature="e#6802#7075#0" expanded="false" />
-            <element signature="e#7078#7124#0" expanded="false" />
-            <element signature="e#7164#7397#0" expanded="false" />
+            <element signature="e#6335#6837#0" expanded="false" />
+            <element signature="e#6875#7148#0" expanded="false" />
+            <element signature="e#7151#7197#0" expanded="false" />
+            <element signature="e#7237#7470#0" expanded="false" />
             <element signature="n#!!block;n#_getOrder#0" expanded="false" />
+            <marker date="1462155818973" expanded="true" signature="0:41" placeholder="/** Created by Abhay on 4/16/2016. ...*/" />
+            <marker date="1462155818973" expanded="true" signature="6226:6241" placeholder="{&quot;statusCode&quot;: 500...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="7" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5492126">
-          <caret line="301" column="70" selection-start-line="301" selection-start-column="70" selection-end-line="301" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.48195878">
+          <caret line="32" column="39" selection-start-line="32" selection-start-column="39" selection-end-line="32" selection-end-column="39" />
           <folding />
         </state>
       </provider>
