@@ -38,6 +38,13 @@ exports.handleRequest = function (message, callback) {
             exports.getAllUnApprovedProducts(callback);
             break;
 
+        case "approveproduct":
+            exports.approveproduct(message.data,callback);
+            break;
+
+        case "decline_request_product":
+            exports.declineproduct(message.data,callback);
+            break;
     }
 }
 
@@ -78,31 +85,41 @@ exports.declinefarmer = function (info,callback) {
 };
 
 
-exports.declineproduct = function (info) {
+exports.declineproduct = function (info,callback) {
     var deferred = Q.defer();
     var searchQuery = JSON.parse(info);
     var cursor = MongoDB.collection("products").remove({"productID" : searchQuery.productID});
-    cursor.then(function (user) {
-        deferred.resolve(user);
+    cursor.then(function () {
+        callback(null, {
+            statusCode: 200,
+            error: null
+        });
     }).catch(function (error) {
-        deferred.reject(error);
+        callback(error, {
+            statusCode: 500,
+            error: error
+        });
     });
-    return deferred.promise;
 };
 
 
 
 
-exports.approveproduct = function (info) {
+exports.approveproduct = function (info,callback) {
     var deferred = Q.defer();
     var searchQuery = JSON.parse(info);
     var cursor = MongoDB.collection("products").update({"productID" : searchQuery.productID},{$set : { "isApproved" : true }});
-    cursor.then(function (user) {
-        deferred.resolve(user);
+    cursor.then(function () {
+        callback(null, {
+            statusCode: 200,
+            error: null
+        });
     }).catch(function (error) {
-        deferred.reject(error);
+        callback(error, {
+            statusCode: 500,
+            error: error
+        });
     });
-    return deferred.promise;
 };
 
 
