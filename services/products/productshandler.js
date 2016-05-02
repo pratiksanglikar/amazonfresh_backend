@@ -414,7 +414,6 @@ _sanitizeProductInfo = function (info, user) {
  * @returns {*|promise}
  * @private
  */
-
 _validateProductInfo = function (info) {
 	if (Utilities.isEmpty(info.productName) || Utilities.isEmpty(info.productPrice) || Utilities.isEmpty(info.description)) {
 		return false;

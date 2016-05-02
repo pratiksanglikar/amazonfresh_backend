@@ -7,10 +7,11 @@ var TripHandler = require("../trips/tripshandler");
 var Mysql = require("../commons/mysqlhandler");
 var ProductHandler = require("../products/productshandler");
 var MongoDB = require("../commons/mongodbhandler");
+var redisClient = require('redis').createClient;
+var redis = redisClient(6379, 'localhost');
 
 exports.handleRequest = function (message, callback) {
     switch (message.type){
-
         case "revenue":
             exports.revenue( callback);
             break;
@@ -29,14 +30,13 @@ exports.handleRequest = function (message, callback) {
 }
 
 exports.generatebill = function (message, callback) {
-    info = message.info;
-    customerSSN = message.customerSSN;
+    var info = message.info;
+    var customerSSN = message.customerSSN;
     var dynamicPricingPromise = [];
     var deferred = Q.defer();
     //var customer_id = ;
     var sqlQuery = "INSERT INTO bill (order_date, total_amount, customer_id) " +
         "VALUES (sysdate(), " + info.total_amount + ", '" + customerSSN + "');";
-    console.log(sqlQuery)
     var insertInBillPromise = Mysql.executeQuery(sqlQuery);
     var getTripIdPromise = [];
     var insertInItemPromise = [];
@@ -56,16 +56,15 @@ exports.generatebill = function (message, callback) {
             Q.all(getTripIdPromise).done(function (tripResult) {
                //tripResult = tripResult.response;
                 for (var i=0; i<tripResult.length; i++) {
-                    tripId = tripResult[i].tripID;
+                    var tripId = tripResult[i].tripID;
                     //expectedDeliveryDate = new Date(tripResult.deliveryTime).toISOString().slice(0, 19).replace('T', ' ');
-                    expectedDeliveryDate = tripResult[i].deliveryTime;
+                    var expectedDeliveryDate = tripResult[i].deliveryTime;
                     sqlQuery = "select count(*) as count,  product_id,product_name, price_per_unit from item where product_id = '" + info.product_details[i].product_id + "' group by product_id";
                     tempPromise = Mysql.executeQuery(sqlQuery);
                     dynamicPricingPromise.push(tempPromise);
                     sqlQuery = "INSERT INTO item" +
                         " ( bill_id, product_id, customer_id, quantity, price_per_unit, trip_id, expected_delivery_date, product_name, product_image_url ) " +
                         "VALUES (" + billId + ", '" + info.product_details[i].product_id + "', '" + customerSSN + "', " + info.product_details[i].quantity + ", " + info.product_details[i].price_per_unit + ",'" + tripId + "', '" + expectedDeliveryDate + "','" + info.product_details[i].product_name + "', '" + info.product_details[i].product_image_url + "');";
-                    console.log(sqlQuery)
                     //sqlQuery = "INSERT INTO item ( bill_id, product_id, quantity, price_per_unit, trip_id, expected_delivery_date, product_name ) VALUES (14, '2c07429444b3bcc71b7b7cadf90f999537a581ad', 1, 5,'fb2589be6d9aae01efaeea104f41035464330e83', '1461748542953','Peanuts');"
                     tempPromise = Mysql.executeQuery(sqlQuery);
                     insertInItemPromise.push(tempPromise);
@@ -91,7 +90,7 @@ exports.generatebill = function (message, callback) {
             });
         })
         Q.all(insertInItemPromise).done(function () {
-            callback(null,{
+			callback(null,{
                 statusCode: 200
             });
         }, function (error) {
@@ -128,9 +127,11 @@ exports.addrating = function (message, callback) {
             var setrating = ((doc.rating*doc.numberOfRatings) + Number(info.rating))/setnumberOfRatings;
             var cursor = MongoDB.collection("products").update({"productID" : info.product_id},{$set : {"rating" : setrating, "numberOfRatings" :  setnumberOfRatings}});
             cursor.then(function () {
-                callback(null,{
-                    statusCode: 200
-                });
+				redis.set(productID, doc, function () {
+					callback(null,{
+						statusCode: 200
+					});
+				});
             }).catch(function (error) {
                 callback(error, {
                     statusCode: 500,
@@ -139,9 +140,9 @@ exports.addrating = function (message, callback) {
             });
         }
         else {
-            callback("Error",{
+            callback("Product not found!",{
                 statusCode: 500,
-                error: "Error"
+                error: "Product not found!"
             });
         }
     });

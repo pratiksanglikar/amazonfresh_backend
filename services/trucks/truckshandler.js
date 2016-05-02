@@ -7,6 +7,8 @@ var PasswordManager = require("../authentication/passwordmanager");
 var Q = require("q");
 var UserTypes = require("../commons/constants").usertypes;
 var GoogleMaps = require("../commons/googlemapshandler");
+var redisClient = require('redis').createClient;
+var redis = redisClient(6379, 'localhost');
 
 
 exports.handleRequest = function (message, callback) {
@@ -154,7 +156,9 @@ exports.delete = function (ssn) {
 			deferred.reject(err);
 		}
 		if (numberOfRemoved.result.n) {
-			deferred.resolve();
+			redis.del(ssn, function () {
+				deferred.resolve();
+			});
 		} else {
 			deferred.reject("Driver with given SSN not found in system!");
 		}
@@ -169,33 +173,55 @@ exports.delete = function (ssn) {
  */
 exports.getTruck = function(ssn, callback) {
 	var user = null;
-	var cursor = MongoDB.collection("users").find({
-		ssn: ssn,
-		isApproved: true,
-		usertype: UserTypes.DRIVER
-	});
-	cursor.each(function (error, doc) {
+
+	redis.get(ssn, function (error, reply) {
 		if(error) {
 			callback(error, {
 				statusCode: 500,
 				error: error
 			});
+			return;
 		}
-		if(doc == null) {
-			if(user == null) {
-				callback("Truck Driver not found!",{
-					statusCode: 500,
-					error: "Truck driver not found!"
-				});
-			} else {
-				delete user.password;
-				callback(null,{
-					statusCode: 200,
-					response: user
-				});
-			}
+		if(reply) {
+			console.log("Cache hit for truck " + ssn);
+			callback(null, {
+				statusCode: 200,
+				response: JSON.parse(reply)
+			});
 		} else {
-			user = doc;
+			console.log("Cache miss for truck " + ssn);
+			var cursor = MongoDB.collection("users").find({
+				ssn: ssn,
+				isApproved: true,
+				usertype: UserTypes.DRIVER
+			});
+			cursor.each(function (error, doc) {
+				if(error) {
+					callback(error, {
+						statusCode: 500,
+						error: error
+					});
+				}
+				if(doc == null) {
+					if(user == null) {
+						callback("Truck Driver not found!",{
+							statusCode: 500,
+							error: "Truck driver not found!"
+						});
+					} else {
+						delete user.password;
+						redis.set(ssn, JSON.stringify(user), function () {
+							console.log("Inserting truck  " + ssn + " into cache!");
+							callback(null,{
+								statusCode: 200,
+								response: user
+							});
+						});
+					}
+				} else {
+					user = doc;
+				}
+			});
 		}
 	});
 };
