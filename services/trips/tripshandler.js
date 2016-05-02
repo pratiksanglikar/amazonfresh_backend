@@ -29,7 +29,7 @@ exports.handleRequest = function (message, callback) {
 			exports.findTripById(message.tripID, callback);
 			break;
 		case "trips_by_customer":
-			exports.getTripsByCustomer(message, callback);
+			exports.getTripsByCustomer( callback);
 			break;
 	}
 }
@@ -375,8 +375,7 @@ exports.getTripsByDriver = function (message, callback) {
 	});
 };
 
-exports.getTripsByCustomer = function (message, callback) {
-	var deferred = q.defer();
+exports.getTripsByCustomer = function (callback) {
 	MongoDB.collection("trips").group(['customerFirstName','customerLastName'],{},{"total":0},"function(obj, prev) {prev.total++;}", function(error, results) {
 		if(error) {
 			callback(error,{
@@ -390,5 +389,4 @@ exports.getTripsByCustomer = function (message, callback) {
 			});
 		}
 	});
-	return deferred.promise;
 };
