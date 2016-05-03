@@ -14,10 +14,12 @@ exports.executeQuery = function (sqlQuery) {
 	var promise = _getConnection();
 	var deferred = Q.defer();
 	promise.done(function (connection) {
+		console.log("Executing query : " + sqlQuery);
 		connection.query(sqlQuery, function (err, rows) {
 			if (!err) {
 				connection.commit(function (error) {
 					if (error) {
+						console.log(error);
 						deferred.reject(error);
 						_releaseConnection(connection);
 					} else {
@@ -27,6 +29,7 @@ exports.executeQuery = function (sqlQuery) {
 				});
 			}
 			else {
+				console.log(err);
 				deferred.reject(err);
 				_releaseConnection(connection);
 			}
@@ -54,7 +57,7 @@ exports.executeTransaction = function (queries) {
 				_releaseConnection(connection);
 			} else {
 				for (var i = 0; i < queries.length; i++) {
-					//console.log("Executing transaction query : " + queries[i]);
+					console.log("Executing transaction query : " + queries[i]);
 					connection.query(queries[i], function (error, result) {
 						if (error) {
 							connection.rollback();

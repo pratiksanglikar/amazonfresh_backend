@@ -161,7 +161,6 @@ exports.delete = function (productID) {
  * @returns {*|promise}
  */
 exports.listallproducts = function (message,callback) {
-	var deferred = Q.defer();
 	var productList = [];
 	var cursor = MongoDB.collection("products").find({
 		isApproved: true
@@ -183,7 +182,6 @@ exports.listallproducts = function (message,callback) {
 					statusCode: 200,
 					response: productList
 				});
-				//deferred.resolve(productList);
 			}
 		});
 	}
@@ -192,9 +190,7 @@ exports.listallproducts = function (message,callback) {
 			statusCode: 500,
 			error: "No records for products!"
 		});
-		//deferred.reject("There are no Records for products");
 	}
-
 };
 /**
  *
