@@ -28,7 +28,7 @@ exports.signup = function(info,callback)
     var deferred = Q.defer();
     var promise = _validateCustomerInfo(info);
     var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
-    var promise1 = GoogleMaps.getLatLang(address);
+    var promise1 = GoogleMaps.getLatLang(address, info.zipCode);
     Q.all([promise, promise1]).done(function (values) {
         info = _sanitizeCustomerInfo(info);
         info.location = values[1];
@@ -85,7 +85,7 @@ exports.getCustomersList = function()
     console.log("In get list function");
     var customers = [];
     var deferred = Q.defer();
-    var cursor = MongoDB.collection("users").find({"usertype" : "CUSTOMER"});
+    var cursor = MongoDB.collection("users").find({"usertype" : "CUSTOMER"}).limit(250);
     if(cursor != null)
     {
         cursor.each(function(err,doc){
@@ -118,7 +118,7 @@ exports.getCustomersList = function()
 exports.getCustomer = function (ssn) {
     var deferred = Q.defer();
     var customer;
-    var cursor = MongoDB.collection("users").find({ssn: ssn});
+    var cursor = MongoDB.collection("users").find({ssn: ssn}).limit(1);
     cursor.each(function (error, doc) {
         if (error) {
             deferred.reject(error);
@@ -187,7 +187,7 @@ exports.customerViewInfo = function(info,callback)
 {
     var deferred = Q.defer();
     var info = JSON.parse(info);
-    var cursor = MongoDB.collection("users").find({"ssn": info.ssn});
+    var cursor = MongoDB.collection("users").find({"ssn": info.ssn}).limit(1);
     var customerList = {};
     cursor.each(function (err, doc) {
         if (err) {
@@ -261,7 +261,7 @@ exports.searchCustomerInfo = function(info,callback)
     var searchQuery = JSON.parse(info);
     var searchQuery = _sanitizeCustomerSearchInput(searchQuery);
     var customerList = [];
-    var cursor = MongoDB.collection("users").find(searchQuery);
+    var cursor = MongoDB.collection("users").find(searchQuery).limit(250);
     if(cursor != null)
     {
         cursor.each(function (err, doc) {

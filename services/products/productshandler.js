@@ -96,6 +96,7 @@ exports.setProductPrice = function (productId, price) {
 exports.createproduct = function (info, user, callback) {
 	var productID = Crypto.createHash('sha1').update(info.productName + user.ssn + new Date().getTime()).digest('hex');
 	info.productID = productID;
+	info._id = productID;
 	var deferred = Q.defer();
 	if (UserTypes.FARMER == user.usertype) {
 		var isValid = _validateProductInfo(info);
@@ -164,7 +165,7 @@ exports.listallproducts = function (message,callback) {
 	var productList = [];
 	var cursor = MongoDB.collection("products").find({
 		isApproved: true
-	});
+	}).limit(500);
 	if (cursor != null) {
 		cursor.each(function (err, doc) {
 			if (err) {
@@ -399,8 +400,8 @@ _sanitizeProductInfo = function (info, user) {
 	info.farmerSSN = user.ssn;
 	info.reviews = [];
 	info.isApproved = false;
-	info.rating = 3.4;
-	info.numberOfRatings = 5;
+	info.rating = 0;
+	info.numberOfRatings = 0;
 	delete info.ssn;
 	return info;
 }

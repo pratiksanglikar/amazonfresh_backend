@@ -11,7 +11,7 @@ var GoogleMaps = require("../commons/googlemapshandler");
 
 
 exports.handleRequest = function (message, callback) {
-    switch (message.type){
+    switch (message.type) {
         case "createfarmer":
             exports.createfarmer(message.data, callback);
             break;
@@ -37,7 +37,7 @@ exports.handleRequest = function (message, callback) {
 exports.createfarmer = function (info, callback) {
     var deferred = Q.defer();
 	var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
-	var promise1 = GoogleMaps.getLatLang(address);
+	var promise1 = GoogleMaps.getLatLang(address, info.zipCode);
     var promise = _validateFarmerInfo(info);
     Q.all([promise,promise1]).done(function (values) {
         info = _sanitizeFarmerInfo(info);
@@ -105,7 +105,7 @@ exports.getAllFarmers = function () {
 exports.getFarmerInfo = function (ssn,callback) {
 
     var deferred = Q.defer();
-    var cursor = MongoDB.collection("users").find({"ssn": ssn});
+    var cursor = MongoDB.collection("users").find({"ssn": ssn}).limit(1);
     var farmerList = null;
     cursor.each(function (err, doc) {
         if (err) {
@@ -148,7 +148,7 @@ exports.farmerViewInfo = function(info,callback)
 {
     var deferred = Q.defer();
     var info = JSON.parse(info);
-    var cursor = MongoDB.collection("users").find({"ssn": info.ssn});
+    var cursor = MongoDB.collection("users").find({"ssn": info.ssn}).limit(1);
     var farmerList = {};
     cursor.each(function (err, doc) {
         if (err) {
@@ -175,7 +175,7 @@ exports.searchFarmerInfo = function(info,callback)
     var searchQuery = _validateSearchInput(searchQuery);
     console.log("Query is" + searchQuery);
     var farmerList = [];
-    var cursor = MongoDB.collection("users").find(searchQuery);
+    var cursor = MongoDB.collection("users").find(searchQuery).limit(250);
     if(cursor != null)
     {
         cursor.each(function (err, doc) {
@@ -213,8 +213,6 @@ exports.searchFarmerInfo = function(info,callback)
 };
 
 exports.updateFarmer = function (info,callback) {
-    console.log("Updating");
-    console.log(info);
     var deferred = Q.defer();
     var promise = _validateFarmerInfo1(info);
     promise.done(function () {

@@ -17,32 +17,40 @@ exports.initGoogleMaps = function () {
 	});
 };
 
+var zipCache = {};
+
 /**
  * returns the latitude longitude of the location provided specified by address.
  * @param address
  * @returns {*|promise}
  */
-exports.getLatLang = function (address) {
+exports.getLatLang = function (address, zipCode) {
 	var deferred = q.defer();
-	if (!GoogleMaps) {
-		exports.initGoogleMaps();
-	}
-	GoogleMaps.geocode({
-		"address": address
-	}, function (err, result) {
-		if (err) {
-			deferred.reject(err);
-		} else {
-			if(result.results) {
-				var results = [];
-				results.push(result.results[0].geometry.location.lat);
-				results.push(result.results[0].geometry.location.lng);
-				deferred.resolve(results);
-			} else {
-				deferred.reject();
-			}
+	if(zipCache[zipCode]) {
+		deferred.resolve(zipCache[zipCode]);
+		return deferred.promise;
+	} else {
+		if (!GoogleMaps) {
+			exports.initGoogleMaps();
 		}
-	});
+		GoogleMaps.geocode({
+			"address": address
+		}, function (err, result) {
+			if (err) {
+				deferred.reject(err);
+			} else {
+				if(result.results) {
+					var results = [];
+					results.push(result.results[0].geometry.location.lat);
+					results.push(result.results[0].geometry.location.lng);
+					zipCache[zipCode] = results;
+					deferred.resolve(results);
+				} else {
+					deferred.reject();
+				}
+			}
+		});
+	}
 	return deferred.promise;
 };
 

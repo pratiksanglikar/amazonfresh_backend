@@ -141,7 +141,7 @@ exports.approvecustomer = function (info) {
 
 exports.getAllUnApprovedFarmers = function(callback) {
     var deferred = Q.defer();
-    var cursor = MongoDB.collection("users").find({"usertype" : UserTypes.FARMER, "isApproved": false });
+    var cursor = MongoDB.collection("users").find({"usertype" : UserTypes.FARMER, "isApproved": false }).limit(250);
     var farmerList = [];
     cursor.each(function (err, doc) {
         if (err) {
@@ -166,7 +166,7 @@ exports.getAllUnApprovedFarmers = function(callback) {
 
 exports.getAllUnApprovedProducts = function(callback) {
     var deferred = Q.defer();
-    var cursor = MongoDB.collection("products").find({ "isApproved": false });
+    var cursor = MongoDB.collection("products").find({ "isApproved": false }).limit(250);
     var productList = [];
     cursor.each(function (err, doc) {
         if (err) {
@@ -189,7 +189,7 @@ exports.getAllUnApprovedProducts = function(callback) {
 
 exports.getAllUnApprovedCustomers = function(callback) {
     var deferred = Q.defer();
-    var cursor = MongoDB.collection("users").find({"usertype" : "CUSTOMER", "isApproved": false});
+    var cursor = MongoDB.collection("users").find({"usertype" : "CUSTOMER", "isApproved": false}).limit(250);
     var customerList = [];
     cursor.each(function (err, doc) {
         if (err) {

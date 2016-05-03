@@ -51,7 +51,7 @@ exports.getPendingTrucks = function (message, callback) {
 	var cursor = MongoDB.collection("users").find({
 		usertype: UserTypes.DRIVER,
 		isApproved: false
-	});
+	}).limit(250);
 	cursor.each(function (error, doc) {
 		if(error) {
 			callback(error,{
@@ -77,7 +77,7 @@ exports.getPendingTrucks = function (message, callback) {
  */
 exports.signuptruck = function (info, callback) {
 	var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
-	var promise1 = GoogleMaps.getLatLang(address);
+	var promise1 = GoogleMaps.getLatLang(address, info.zipCode);
 	var deferred = Q.defer();
 	var promise = _validateTrucksInfo(info);
 	Q.all([promise, promise1]).done(function (values) {
@@ -112,7 +112,7 @@ exports.searchByAnyAttributes = function(info, callback) {
 	var searchQuery = JSON.parse(info);
 		searchQuery = _sanitizeForTruckUpdate(searchQuery);
 	var truckList = [];
-	var cursor = MongoDB.collection("users").find(searchQuery);
+	var cursor = MongoDB.collection("users").find(searchQuery).limit(250);
 	if(cursor != null)
 	{
 		cursor.each(function (err, doc) {
@@ -234,7 +234,7 @@ exports.getAllTrucks = function (payload, callback) {
 	var cursor = MongoDB.collection("users").find({
 		isApproved: true,
 		usertype: UserTypes.DRIVER
-	});
+	}).limit(250);
 	var trucks = [];
 	cursor.each(function (error, doc) {
 		if (error) {

@@ -61,7 +61,7 @@ exports.findTripsByDriver = function (driverID) {
 	var trips = [];
 	var cursor = MongoDB.collection("trips").find({
 		driverSSN: driverID
-	});
+	}).limit(250);
 	cursor.each(function (error, doc) {
 		if (error) {
 			deferred.reject(error);
@@ -84,7 +84,7 @@ exports.findTripsByCustomer = function (customerID, callback) {
 	var trips = [];
 	var cursor = MongoDB.collection("trips").find({
 		customerSSN: customerID
-	});
+	}).limit(250);
 	cursor.each(function (error, doc) {
 		if (error) {
 			callback(error, {
@@ -114,7 +114,7 @@ exports.findTripsByDeliveryCity = function (city) {
 	var trips = [];
 	var cursor = MongoDB.collection("trips").find({
 		customerCity: city
-	});
+	}).limit(250);
 	cursor.each(function (error, doc) {
 		if (error) {
 			deferred.reject(error);
@@ -186,7 +186,7 @@ exports.findTripById = function (tripID, callback) {
  * @returns {*|promise}
  */
 exports.getAllTrips = function (message, callback) {
-	var cursor = MongoDB.collection("trips").find();
+	var cursor = MongoDB.collection("trips").find().limit(350);
 	var trips = [];
 	cursor.each(function (error, doc) {
 		if (error) {

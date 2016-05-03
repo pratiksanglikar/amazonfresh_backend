@@ -11,15 +11,15 @@ var redisClient = require('redis').createClient;
 var redis = redisClient(6379, 'localhost');
 
 exports.handleRequest = function (message, callback) {
-    switch (message.type){
+    switch (message.type) {
         case "revenue":
-            exports.revenue( callback);
+            exports.revenue(callback);
             break;
         case "generatebill":
-            exports.generatebill( message, callback);
+            exports.generatebill(message, callback);
             break;
         case "addrating":
-            exports.addrating( message, callback);
+            exports.addrating(message, callback);
             break;
         default:
             callback("Bad Request", {
@@ -88,7 +88,7 @@ exports.generatebill = function (message, callback) {
                 statusCode: 500,
                 error: error
             });
-        })
+        });
         Q.all(insertInItemPromise).done(function () {
 			callback(null,{
                 statusCode: 200
@@ -98,7 +98,7 @@ exports.generatebill = function (message, callback) {
                 statusCode: 500,
                 error: error
             });
-        })
+        });
     }, function (error) {
         callback(error, {
             statusCode: 500,
@@ -147,7 +147,7 @@ exports.addrating = function (message, callback) {
         }
     });
     //return deferred.promise;
-}
+};
 
 exports.revenue = function ( callback) {
     var deferred = Q.defer();

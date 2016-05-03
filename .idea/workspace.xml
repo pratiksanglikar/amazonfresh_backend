@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f72cd700-05da-4559-92ce-e55ddef8ff60" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/populateDB/PopulateDB.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/admin/adminhandler.js" afterPath="$PROJECT_DIR$/services/admin/adminhandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/bills/billshandler.js" afterPath="$PROJECT_DIR$/services/bills/billshandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/commons/googlemapshandler.js" afterPath="$PROJECT_DIR$/services/commons/googlemapshandler.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/commons/mongodbhandler.js" afterPath="$PROJECT_DIR$/services/commons/mongodbhandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/customers/customershandler.js" afterPath="$PROJECT_DIR$/services/customers/customershandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/farmers/farmerhandler.js" afterPath="$PROJECT_DIR$/services/farmers/farmerhandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/products/productshandler.js" afterPath="$PROJECT_DIR$/services/products/productshandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/trips/tripshandler.js" afterPath="$PROJECT_DIR$/services/trips/tripshandler.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/trucks/truckshandler.js" afterPath="$PROJECT_DIR$/services/trucks/truckshandler.js" />
     </list>
     <ignored path="amazonfresh_backend.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,21 +34,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="billshandler.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="billshandler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/services/bills/billshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="90" column="10" selection-start-line="90" selection-start-column="10" selection-end-line="90" selection-end-column="10" />
+            <state relative-caret-position="82">
+              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -47,19 +47,21 @@
       <file leaf-file-name="tripshandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2031">
-              <caret line="365" column="32" selection-start-line="365" selection-start-column="32" selection-end-line="365" selection-end-column="32" />
+            <state relative-caret-position="5850">
+              <caret line="390" column="7" selection-start-line="390" selection-start-column="7" selection-end-line="390" selection-end-column="7" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mongodbhandler.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mongodbhandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/commons/mongodbhandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
-              <folding />
+            <state relative-caret-position="15">
+              <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
+              <folding>
+                <element signature="e#0#50#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,8 +69,18 @@
       <file leaf-file-name="productshandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2490">
-              <caret line="166" column="6" selection-start-line="166" selection-start-column="6" selection-end-line="166" selection-end-column="6" />
+            <state relative-caret-position="172">
+              <caret line="216" column="40" selection-start-line="216" selection-start-column="38" selection-end-line="216" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PopulateDB.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/populateDB/PopulateDB.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -84,11 +96,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="truckshandler.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/services/trucks/truckshandler.js">
+      <file leaf-file-name="googlemapshandler.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/commons/googlemapshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3390">
-              <caret line="226" column="2" selection-start-line="226" selection-start-column="2" selection-end-line="226" selection-end-column="2" />
+            <state relative-caret-position="810">
+              <caret line="54" column="1" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -97,8 +109,8 @@
       <file leaf-file-name="farmerhandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/farmers/farmerhandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="930">
-              <caret line="62" column="11" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
+            <state relative-caret-position="199">
+              <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -107,11 +119,21 @@
       <file leaf-file-name="adminhandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state relative-caret-position="404">
+              <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
               <folding>
-                <marker date="1462151658000" expanded="true" signature="5658:5661" placeholder="{...}" />
+                <marker date="1462239488000" expanded="true" signature="5691:5694" placeholder="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customershandler.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/customers/customershandler.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1725">
+              <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,12 +159,16 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/services/farmers/farmerhandler.js" />
-        <option value="$PROJECT_DIR$/services/bills/billshandler.js" />
+        <option value="$PROJECT_DIR$/services/commons/googlemapshandler.js" />
         <option value="$PROJECT_DIR$/services/trucks/truckshandler.js" />
-        <option value="$PROJECT_DIR$/services/products/productshandler.js" />
+        <option value="$PROJECT_DIR$/services/admin/adminhandler.js" />
+        <option value="$PROJECT_DIR$/services/bills/billshandler.js" />
         <option value="$PROJECT_DIR$/services/trips/tripshandler.js" />
         <option value="$PROJECT_DIR$/services/commons/mongodbhandler.js" />
+        <option value="$PROJECT_DIR$/services/farmers/farmerhandler.js" />
+        <option value="$PROJECT_DIR$/services/customers/customershandler.js" />
+        <option value="$PROJECT_DIR$/services/populateDB/PopulateDB.js" />
+        <option value="$PROJECT_DIR$/services/products/productshandler.js" />
       </list>
     </option>
   </component>
@@ -212,6 +238,96 @@
               <option name="myItemId" value="services" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trucks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="products" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="populateDB" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="farmers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="customers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -228,6 +344,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="commons" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="amazonfresh_backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bills" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -264,7 +398,7 @@
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="productshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;trips&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;trucks&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trucks/truckshandler.js&#10;bill&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;farmerh&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;bi&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;productshan&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js" />
+    <property name="SearchEverywhereHistoryKey" value="products&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;bills&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;custo&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;tripshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;adminhandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/admin/adminhandler.js&#10;customers&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;farmer&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;productshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;trips&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;trucks&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trucks/truckshandler.js&#10;bill&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;farmerh&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;bi&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;productshan&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="106" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="107" />
@@ -369,7 +503,7 @@
       <workItem from="1461992056277" duration="4255000" />
       <workItem from="1461996634534" duration="10259000" />
       <workItem from="1462073402422" duration="18866000" />
-      <workItem from="1462217205644" duration="1011000" />
+      <workItem from="1462217205644" duration="27371000" />
     </task>
     <task id="LOCAL-00001" summary="Redis implemented for trips.">
       <created>1462074863839</created>
@@ -406,21 +540,28 @@
       <option name="project" value="LOCAL" />
       <updated>1462163371334</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="increased mongodb connection limit to increase performance.">
+      <created>1462220793587</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1462220793587</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34391000" />
+    <option name="totallyTimeSpent" value="60751000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="724" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32753164" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.221519" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3280757" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -451,18 +592,20 @@
     <MESSAGE value="added number of ratings in products" />
     <MESSAGE value="kahitari changes" />
     <MESSAGE value="added break statement in switch case, &#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="added break statement in switch case, &#10;" />
+    <MESSAGE value="increased mongodb connection limit to increase performance." />
+    <option name="LAST_COMMIT_MESSAGE" value="increased mongodb connection limit to increase performance." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/services/trips/tripshandler.js</url>
-          <line>384</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/services/products/productshandler.js</url>
+          <line>418</line>
+          <properties />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -495,7 +638,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
+          <folding>
+            <element signature="e#0#50#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -536,7 +681,7 @@
         <state relative-caret-position="135">
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
-            <marker date="1462151658000" expanded="true" signature="5658:5661" placeholder="{...}" />
+            <marker date="1462239488000" expanded="true" signature="5691:5694" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -553,7 +698,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
           <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
-          <folding />
+          <folding>
+            <element signature="e#0#50#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -570,7 +717,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1462151658000" expanded="true" signature="5658:5661" placeholder="{...}" />
+            <marker date="1462239488000" expanded="true" signature="5691:5694" placeholder="{...}" />
           </folding>
         </state>
       </provider>
@@ -593,20 +740,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <marker date="1462151658000" expanded="true" signature="5658:5661" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="36" column="46" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/trucks/truckshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5685">
+          <caret line="379" column="1" selection-start-line="379" selection-start-column="1" selection-end-line="379" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -618,58 +771,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/services/commons/googlemapshandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="51" selection-start-line="30" selection-start-column="51" selection-end-line="30" selection-end-column="51" />
+        <state relative-caret-position="810">
+          <caret line="54" column="1" selection-start-line="54" selection-start-column="1" selection-end-line="54" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/admin/adminhandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="211" column="1" selection-start-line="211" selection-start-column="1" selection-end-line="211" selection-end-column="1" />
+          <folding>
+            <marker date="1462239488000" expanded="true" signature="5691:5694" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5850">
+          <caret line="390" column="7" selection-start-line="390" selection-start-column="7" selection-end-line="390" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/farmers/farmerhandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="62" column="11" selection-start-line="62" selection-start-column="11" selection-end-line="62" selection-end-column="11" />
+        <state relative-caret-position="199">
+          <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/bills/billshandler.js">
+    <entry file="file://$PROJECT_DIR$/services/customers/customershandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="90" column="10" selection-start-line="90" selection-start-column="10" selection-end-line="90" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/trucks/truckshandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3390">
-          <caret line="226" column="2" selection-start-line="226" selection-start-column="2" selection-end-line="226" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2490">
-          <caret line="166" column="6" selection-start-line="166" selection-start-column="6" selection-end-line="166" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2031">
-          <caret line="365" column="32" selection-start-line="365" selection-start-column="32" selection-end-line="365" selection-end-column="32" />
+        <state relative-caret-position="-1725">
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/commons/mongodbhandler.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="53" column="2" selection-start-line="53" selection-start-column="2" selection-end-line="53" selection-end-column="2" />
+        <state relative-caret-position="15">
+          <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#50#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/populateDB/PopulateDB.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="216" column="40" selection-start-line="216" selection-start-column="38" selection-end-line="216" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/bills/billshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
           <folding />
         </state>
       </provider>

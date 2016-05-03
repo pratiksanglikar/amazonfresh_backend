@@ -1,8 +1,8 @@
 /**
  * Created by pratiksanglikar on 12/04/16.
  */
-/*const MONGODB_URL = "mongodb://localhost:27017/amazonfresh";*/
-const MONGODB_URL = "mongodb://amazonfresh:amazonfresh@ds025180.mlab.com:25180/amazonfresh";
+const MONGODB_URL = "mongodb://localhost:27017/amazonfresh";
+//const MONGODB_URL = "mongodb://amazonfresh:amazonfresh@ds025180.mlab.com:25180/amazonfresh";
 exports.MONGODB_URL = MONGODB_URL;
 var MongoClient = require('mongodb').MongoClient;
 var db;
