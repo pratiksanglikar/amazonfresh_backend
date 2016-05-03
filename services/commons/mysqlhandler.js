@@ -92,11 +92,11 @@ exports.executeTransaction = function (queries) {
 function _getPool() {
 	if (pool == undefined) {
 		pool = _createPool({
-			host: 'sql3.freemysqlhosting.net',
-			user: 'sql3117040',
-			password: '5eHPZkWr6h',
-			database: 'sql3117040',
-			poolsize: 10
+			host: 'localhost',
+			user: 'root',
+			password: 'pratik2901',
+			database: 'amazonfresh',
+			poolsize: 25
 		});
 	}
 	return pool;
