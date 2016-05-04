@@ -116,7 +116,7 @@ exports.getCustomersList = function()
  */
 exports.getCustomer = function (ssn) {
     var deferred = Q.defer();
-    var customer;
+    var customer = null;
     var cursor = MongoDB.collection("users").find({ssn: ssn}).limit(1);
     cursor.each(function (error, doc) {
         if (error) {

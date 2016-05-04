@@ -67,7 +67,7 @@ exports.createfarmer = function (info, callback) {
 };
 /*
 exports.delete = function (ssn) {
-    console.log("ssn is " + ssn);
+    //console.log("ssn is " + ssn);
        var deferred = Q.defer();
     MongoDB.collection("users").remove({
         "ssn": ssn, "isApproved" : true
@@ -121,8 +121,8 @@ exports.getFarmerInfo = function (ssn,callback) {
             farmerList = doc;
         } else {
             if (farmerList) {
-                console.log("here coming ggg");
-                console.log(farmerList);
+                ////console.log("here coming ggg");
+                ////console.log(farmerList);
                 deferred.resolve(farmerList);
                 if(callback) {
                     callback(null, {
@@ -173,7 +173,7 @@ exports.searchFarmerInfo = function(info,callback)
    // var deferred = Q.defer();
     var searchQuery = JSON.parse(info);
     var searchQuery = _validateSearchInput(searchQuery);
-    console.log("Query is" + searchQuery);
+    ////console.log("Query is" + searchQuery);
     var farmerList = [];
     var cursor = MongoDB.collection("users").find(searchQuery).limit(250);
     if(cursor != null)
@@ -235,14 +235,14 @@ exports.updateFarmer = function (info,callback) {
                 "location" : info.location
             });
         cursor.then(function (user) {
-            console.log("Frome first");
+            //console.log("Frome first");
             callback(null, {
                 statusCode: 200,
                 response: ""
             });
           //  deferred.resolve(user);
         }).catch(function (err) {
-            console.log("Frome 2nd" + err);
+            //console.log("Frome 2nd" + err);
             callback(err, {
                 statusCode: 500,
                 error: err
@@ -250,7 +250,7 @@ exports.updateFarmer = function (info,callback) {
           //  deferred.reject(error);
         });
     }, function (err) {
-        console.log("Frome 4nd");
+        //console.log("Frome 4nd");
         callback(err, {
             statusCode: 500,
             error: err

@@ -10,6 +10,8 @@ var Farmers = require("../farmers/farmerhandler");
 var Customers = require("../customers/customershandler");
 var Products = require("../products/productshandler");
 var Bills = require("../bills/billshandler");
+var Q = require("q");
+var MongoDB = require("../commons/mongodbhandler");
 
 exports.handleRequest = function (message, callback) {
 	switch (message.type){
@@ -206,7 +208,28 @@ constructDriverInfo = function (i) {
 }
 
 populateBills = function (message, callback) {
-	Bills.generatebill(message, callback);
+
+	var i = 500;
+	function myLoop(i) {
+		setTimeout(function () {
+			if( i < 5000) {
+				var messagePromise = _constructMessageDetails(i);
+				messagePromise.done(function (message) {
+					Bills.generatebill({
+						customerSSN: message.customerSSN,
+						info: message
+					}, function () {
+						console.log("Bill generated : " + i);
+					});
+				}, function (error) {
+					console.log(i + " Error generating bill : " + error);
+				});
+			}
+			myLoop(++i);
+		}, 750);
+	}
+	myLoop(i);
+
 
 	/**
 	 * message.customerSSN = ''
@@ -242,6 +265,55 @@ populateBills = function (message, callback) {
   ]
 }
 	 */
+}
+
+_constructMessageDetails = function (i) {
+	var deferred = Q.defer();
+	var message = {};
+	var customerSSN = getCustomerSSN(i);
+	var productPromise = getRandomProduct(9999 - i);
+	productPromise.done(function (product) {
+		message.product_details = [{
+			product_id: product.productID,
+			quantity: 2,
+			price_per_unit: product.productPrice,
+			farmer_id: product.farmerSSN,
+			product_name: product.productName,
+			product_image_url: product.productImage
+		}];
+		message.customerSSN = customerSSN;
+		message.total_amount = 2 * product.productPrice;
+		deferred.resolve(message);
+	}, function (error) {
+		deferred.reject(error);
+	});
+
+	return deferred.promise;
+}
+
+getRandomProduct = function (i) {
+	var deferred = Q.defer();
+	var farmerSSN = getFarmerSSN(i);
+	var product = null;
+	var cursor = MongoDB.collection("products").find({
+		farmerSSN: farmerSSN
+	});
+	cursor.each(function (error, doc) {
+		if(error) {
+			deferred.reject(error);
+		}
+		if(doc != null) {
+			product = doc;
+		} else {
+			if(product == null) {
+				deferred.reject("Product not found!");
+			} else {
+				deferred.resolve(product);
+			}
+		}
+
+	});
+	return deferred.promise;
 }
 
 var randomAddresses = [
@@ -585,6 +657,9 @@ getFarmerSSN = function (i) {
 
 
 getCustomerSSN = function (i) {
+	if(i < 27) {
+		i = 28;
+	}
 	var ssn = "003-23-";
 	if((i >= 1000 && i <= 9999) > 0) {
 		ssn += i;

@@ -29,7 +29,7 @@ exports.handleRequest = function (message, callback) {
 			exports.findTripById(message.tripID, callback);
 			break;
 		case "trips_by_customer":
-			exports.getTripsByCustomer( callback);
+			exports.getTripsByCustomer(callback);
 			break;
 	}
 }
@@ -300,7 +300,7 @@ _constructTripDetails = function (customer, farmer, product, journeyDetails, dri
 		customerAddress = customer.address + " , " + customer.city + " , " + customer.state + " , " + customer.zipCode,
 		farmerAddress = farmer.address + " , " + farmer.city + " , " + farmer.state + " , " + farmer.zipCode,
 		orderTime = new Date().getTime(),
-		deliveryTime = orderTime + (journeyDetails.timeRequired * 1000),
+		deliveryTime = orderTime /*+ (journeyDetails.timeRequired * 1000)*/,
 		deliverySteps = journeyDetails.steps;
 
 	var tripDetails = {
@@ -372,7 +372,7 @@ exports.getTripsByDriver = function (message, callback) {
 				response: results
 			});
 		}
-	});
+	}).limit(200);
 };
 
 exports.getTripsByCustomer = function (callback) {
@@ -388,5 +388,5 @@ exports.getTripsByCustomer = function (callback) {
 				response: results
 			});
 		}
-	});
+	}).limit(200);
 };

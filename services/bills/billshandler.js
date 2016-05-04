@@ -217,8 +217,7 @@ exports.addrating = function (message, callback) {
 
 exports.revenue = function ( callback) {
     var deferred = Q.defer();
-    var sqlQuery = "SELECT order_date as date, SUM(total_amount) as revenue " +
-        "FROM bill GROUP BY CAST(order_date AS DATE);";
+    var sqlQuery = "SELECT cast(order_date as date) , SUM(total_amount) as revenue FROM bill GROUP BY CAST(order_date AS DATE);";
     var promise = Mysql.executeQuery(sqlQuery);
     promise.done( function (rows) {
         callback(null,{
