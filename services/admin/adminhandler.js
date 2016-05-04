@@ -126,7 +126,7 @@ exports.approveproduct = function (info,callback) {
 exports.approvecustomer = function (info) {
     var deferred = Q.defer();
     var searchQuery = JSON.parse(info);
-    console.log(searchQuery);
+    //console.log(searchQuery);
     var cursor = MongoDB.collection("users").update({"ssn" : searchQuery.info.ssn},{$set : { "isApproved" : true }});
     cursor.then(function (user) {
         deferred.resolve(user);

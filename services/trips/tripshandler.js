@@ -31,6 +31,14 @@ exports.handleRequest = function (message, callback) {
 		case "trips_by_customer":
 			exports.getTripsByCustomer(callback);
 			break;
+		case "trips_by_location":
+			exports.getTripsByLocation(callback);
+			break;
+		default:
+			callback("Bad Request", {
+				statusCode: 400,
+				error: "Bad Request"
+			});
 	}
 }
 
@@ -300,7 +308,7 @@ _constructTripDetails = function (customer, farmer, product, journeyDetails, dri
 		customerAddress = customer.address + " , " + customer.city + " , " + customer.state + " , " + customer.zipCode,
 		farmerAddress = farmer.address + " , " + farmer.city + " , " + farmer.state + " , " + farmer.zipCode,
 		orderTime = new Date().getTime(),
-		deliveryTime = orderTime /*+ (journeyDetails.timeRequired * 1000)*/,
+		deliveryTime = orderTime + (journeyDetails.timeRequired * 10),
 		deliverySteps = journeyDetails.steps;
 
 	var tripDetails = {
@@ -390,3 +398,20 @@ exports.getTripsByCustomer = function (callback) {
 		}
 	}).limit(200);
 };
+
+
+exports.getTripsByLocation = function (callback) {
+	MongoDB.collection("trips").group(['destination'],{},{"total":0},"function(obj, prev) {prev.total++;}", function(error, results){
+		if(error) {
+			callback(error, {
+				statusCode: 500,
+				error: error
+			});
+		} else {
+			callback(null,{
+				statusCode: 200,
+				response: results
+			});
+		}
+	});
+}

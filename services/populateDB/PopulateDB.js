@@ -209,23 +209,28 @@ constructDriverInfo = function (i) {
 
 populateBills = function (message, callback) {
 
-	var i = 500;
+	var i = 0;
 	function myLoop(i) {
 		setTimeout(function () {
-			if( i < 5000) {
+			if(i < 5000) {
 				var messagePromise = _constructMessageDetails(i);
 				messagePromise.done(function (message) {
 					Bills.generatebill({
 						customerSSN: message.customerSSN,
 						info: message
-					}, function () {
-						console.log("Bill generated : " + i);
+					}, function (error) {
+						if(error) {
+							console.log("Error:" + error);
+						} else {
+							console.log("Bill generated : " + i);
+						}
 					});
 				}, function (error) {
 					console.log(i + " Error generating bill : " + error);
 				});
 			}
-			myLoop(++i);
+			i += 3;
+			myLoop(i);
 		}, 750);
 	}
 	myLoop(i);
@@ -271,7 +276,7 @@ _constructMessageDetails = function (i) {
 	var deferred = Q.defer();
 	var message = {};
 	var customerSSN = getCustomerSSN(i);
-	var productPromise = getRandomProduct(9999 - i);
+	var productPromise = getRandomProduct(Math.abs(6542 - i));
 	productPromise.done(function (product) {
 		message.product_details = [{
 			product_id: product.productID,

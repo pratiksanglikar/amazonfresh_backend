@@ -4,6 +4,7 @@
 GoogleMaps = null;
 var GoogleMapsAPI = require("googlemaps");
 var q = require("q");
+var directionsCache = {};
 
 /**
  * initializes the GoogleMaps API to be used in application.
@@ -60,7 +61,12 @@ exports.getLatLang = function (address, zipCode) {
  * @param destination
  */
 exports.getDirections = function (origin, destination) {
+	var string = origin[0]+origin[1]+destination[0]+destination[1];
 	var deferred = q.defer();
+	if(directionsCache[string]) {
+		deferred.resolve(directionsCache[string]);
+		return deferred.promise;
+	}
 	if (!GoogleMaps) {
 		exports.initGoogleMaps();
 	}
@@ -82,7 +88,8 @@ exports.getDirections = function (origin, destination) {
 					timeRequired: result.routes[0].legs[0].duration_in_traffic.value,
 					steps: _extractSteps(result.routes[0].legs[0].steps)
 				}
-				deferred.resolve(tripDetails);
+				directionsCache[string] = tripDetails;
+				deferred.resolve(directionsCache[string]);
 			} else {
 				deferred.reject();
 			}
