@@ -40,12 +40,14 @@ exports.signup = function(info,callback)
             });
 
         }).catch(function (error) {
+            console.log("error while signing up is ---"+error);
             callback(error, {
                 statusCode: 500,
                 error: error
             });
         });
     },function(error) {
+        console.log("error while signing up is ---"+error);
         callback(error, {
             statusCode: 500,
             error: error
