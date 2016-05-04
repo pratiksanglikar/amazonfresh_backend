@@ -31,72 +31,6 @@ exports.handleRequest = function (message, callback) {
 }
 
 exports.generatebill = function (message, callback) {
-	/*var info = message.info;
-	var customerSSN = message.customerSSN;
-	var dynamicPricingPromise = [];
-	var billID_new = Crypto.createHash('sha1').update(customerSSN + new Date().getTime()).digest('hex');
-	var deferred = Q.defer();
-	//var customer_id = ;
-	var sqlQuery = "INSERT INTO bill (bill_id, order_date, total_amount, customer_id) " +
-		"VALUES (" + billID_new + " , sysdate() , " + info.total_amount + ", '" + customerSSN + "');";
-	var insertInBillPromise = Mysql.executeQuery(sqlQuery);
-	var getTripIdPromise = [];
-	var insertInItemPromise = [];
-	insertInBillPromise.done(function () {
-		var billId = billID_new;
-		var tempPromise;
-		for (var key in info.product_details) {
-			var product_id = info.product_details[key].product_id;
-			tempPromise = TripHandler.generateTrip(customerSSN, info.product_details[key].farmer_id, product_id);
-			getTripIdPromise.push(tempPromise);
-		}
-		var tripResult = [];
-		Q.all(getTripIdPromise).done(function (tripResult) {
-			//tripResult = tripResult.response;
-			for (var i = 0; i < tripResult.length; i++) {
-				var tripId = tripResult[i].tripID;
-				//expectedDeliveryDate = new Date(tripResult.deliveryTime).toISOString().slice(0, 19).replace('T', ' ');
-				var expectedDeliveryDate = tripResult[i].deliveryTime;
-				sqlQuery = "select count(*) as count,  product_id, product_name, price_per_unit from item where product_id = '" + info.product_details[i].product_id + "' group by product_id";
-				tempPromise = Mysql.executeQuery(sqlQuery);
-				dynamicPricingPromise.push(tempPromise);
-				sqlQuery = "INSERT INTO item" +
-					" ( bill_id, product_id, customer_id, quantity, price_per_unit, trip_id, expected_delivery_date, product_name, product_image_url ) " +
-					"VALUES (" + billId + ", '" + info.product_details[i].product_id + "', '" + customerSSN + "', " + info.product_details[i].quantity + ", " + info.product_details[i].price_per_unit + ",'" + tripId + "', '" + expectedDeliveryDate + "','" + info.product_details[i].product_name + "', '" + info.product_details[i].product_image_url + "');";
-				//sqlQuery = "INSERT INTO item ( bill_id, product_id, quantity, price_per_unit, trip_id, expected_delivery_date, product_name ) VALUES (14, '2c07429444b3bcc71b7b7cadf90f999537a581ad', 1, 5,'fb2589be6d9aae01efaeea104f41035464330e83', '1461748542953','Peanuts');"
-				tempPromise = Mysql.executeQuery(sqlQuery);
-				insertInItemPromise.push(tempPromise);
-			}
-			Q.all(dynamicPricingPromise).done(function (dynamicPricingResult) {
-				for (var j = 0; j < dynamicPricingPromise.length; j++) {
-					for (var i = 0; i < dynamicPricingResult[j].length; i++) {
-						ProductHandler.adjustDynamicPrice(dynamicPricingResult[j][i].product_id, dynamicPricingResult[j][i].count, dynamicPricingResult[j][i].price_per_unit);
-					}
-				}
-			});
-		}, function (error) {
-			callback(error, {
-				statusCode: 500,
-				error: error
-			});
-		});
-	}, function (error) {
-		callback(error, {
-			statusCode: 500,
-			error: error
-		});
-	});
-	Q.all(insertInItemPromise).done(function () {
-		callback(null, {
-			statusCode: 200
-		});
-	}, function (error) {
-		callback(error, {
-			statusCode: 500,
-			error: error
-		});
-	});*/
-
 	var customerSSN = message.customerSSN;
 	var billID = Crypto.createHash('sha1').update(customerSSN + new Date().getTime()).digest('hex');
 	var sqlQuery = "INSERT INTO bill (bill_id, order_date, total_amount, customer_id) " +
@@ -173,14 +107,10 @@ exports.generatebill = function (message, callback) {
 	});
 }
 
-    //
-
-   // return deferred.promise;
-
 
 exports.addrating = function (message, callback) {
-    //var deferred = Q.defer();
-    info = message.info;
+    var info = message.info;
+	var product = null;
     var cursor = MongoDB.collection("products").find({"productID" : info.product_id});
     cursor.each(function (error, doc) {
         if (error) {
@@ -190,33 +120,34 @@ exports.addrating = function (message, callback) {
                 });
         }
         if (doc != null) {
-            var setnumberOfRatings = doc.numberOfRatings + 1;
-            var setrating = ((doc.rating*doc.numberOfRatings) + Number(info.rating))/setnumberOfRatings;
-            var cursor = MongoDB.collection("products").update({"productID" : info.product_id},{$set : {"rating" : setrating, "numberOfRatings" :  setnumberOfRatings}});
-            cursor.then(function () {
-				redis.set(productID, doc, function () {
+			product = doc;
+        }
+        else {
+			if(product === null) {
+				callback("Product not found!",{
+					statusCode: 500,
+					error: "Product not found!"
+				});
+			} else {
+				var setnumberOfRatings = product.numberOfRatings + 1;
+				var setrating = ((product.rating * product.numberOfRatings) + Number(info.rating))/setnumberOfRatings;
+				var cursor = MongoDB.collection("products").update({"productID" : info.product_id},{$set : {"rating" : setrating, "numberOfRatings" :  setnumberOfRatings}});
+				cursor.then(function () {
 					callback(null,{
 						statusCode: 200
 					});
+				}).catch(function (error) {
+					callback(error, {
+						statusCode: 500,
+						error: error
+					});
 				});
-            }).catch(function (error) {
-                callback(error, {
-                    statusCode: 500,
-                    error: error
-                });
-            });
-        }
-        else {
-            callback("Product not found!",{
-                statusCode: 500,
-                error: "Product not found!"
-            });
+			}
         }
     });
 };
 
 exports.revenue = function ( callback) {
-    var deferred = Q.defer();
     var sqlQuery = "SELECT cast(order_date as date) , SUM(total_amount) as revenue FROM bill GROUP BY CAST(order_date AS DATE);";
     var promise = Mysql.executeQuery(sqlQuery);
     promise.done( function (rows) {
@@ -230,7 +161,6 @@ exports.revenue = function ( callback) {
             error: error
         });
     });
-    //return deferred.promise;
 };
 
 exports.delete = function (billId) {
