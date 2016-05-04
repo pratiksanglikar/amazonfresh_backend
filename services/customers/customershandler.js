@@ -25,7 +25,6 @@ exports.handleRequest = function (message, callback) {
 
 exports.signup = function(info,callback)
 {
-    var deferred = Q.defer();
     var promise = _validateCustomerInfo(info);
     var address = info.address + "," + info.city + "," + info.state + "," + info.zipCode;
     var promise1 = GoogleMaps.getLatLang(address, info.zipCode);

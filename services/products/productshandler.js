@@ -19,7 +19,7 @@ exports.handleRequest = function (message, callback) {
 			exports.delete(message.productID, callback);
 			break;
 		case "listallproducts":
-			exports.listallproducts(message.payload, callback);
+			exports.listallproducts(callback);
 			break;
 		case "getproductinfo":
 			exports.getproductinfo(message.productID, callback);
@@ -39,6 +39,11 @@ exports.handleRequest = function (message, callback) {
 		case "update_products":
 			console.log("In update products");
 			exports.updateproduct(message.data, callback);
+			break;
+
+		case "searchProductByName":
+			console.log("In search Products By Name");
+			exports.searchproduct(message.data, callback);
 			break;
 
 		default:
@@ -160,19 +165,19 @@ exports.delete = function (productID) {
  * function to list all products.
  * @returns {*|promise}
  */
-exports.listallproducts = function (message,callback) {
+exports.listallproducts = function (callback) {
 	var productList = [];
 	var cursor = MongoDB.collection("products").find({
 		isApproved: true
 	}).limit(500);
-	if (cursor != null) {
+	if (cursor != null)
+	{
 		cursor.each(function (err, doc) {
 			if (err) {
 				callback(err, {
 					statusCode: 500,
 					error: err
 				});
-				//deferred.reject(err);
 			}
 			else if (doc != null) {
 				productList = productList.concat(doc);
@@ -180,13 +185,14 @@ exports.listallproducts = function (message,callback) {
 			else {
 				callback(null, {
 					statusCode: 200,
-					response: productList
+					response: productList,
+					error : err
 				});
 			}
 		});
 	}
 	else {
-		callback("No records for products!", {
+		callback(null, {
 			statusCode: 500,
 			error: "No records for products!"
 		});
@@ -337,23 +343,42 @@ exports.searchByProductId = function (info,callback) {
 	});
 };
 
-exports.searchproduct = function (productName) {
-	var deferred = Q.defer();
-	var product = MongoDB.collection("products").findOne({"productName": productName},
-		function (err, doc) {
-			if (err) {
-				deferred.reject(err);
+exports.searchproduct = function (info,callback) {
+	var productName = info.productName;
+	var productList = [];
+	console.log("In product handler and product Name is --"+ productName);
+	var cursor = MongoDB.collection("products").find({"productName": productName});
+	if(cursor != null)
+	{
+		cursor.each(function(err,product){
+			if(err)
+			{
+				callback(err,{
+					statusCode : 500,
+					error : err
+				});
 			}
-			if (doc != null) {
-				product = doc;
-				console.log(product);
-				deferred.resolve(product);
+			else if(product != null)
+			{
+				productList = productList.concat(product);
 			}
-			else {
-				deferred.reject("There are no Records for product");
+			else
+			{
+				callback(null,{
+					statusCode : 200,
+					data : productList
+				});
 			}
 		});
-	return deferred.promise;
+	}
+	else
+	{
+		callback(err,{
+			statusCode : 500,
+			error : "Product Not found"
+		});
+	}
+
 };
 
 exports.updateproduct = function (info, callback) {

@@ -213,7 +213,6 @@ exports.addrating = function (message, callback) {
             });
         }
     });
-    //return deferred.promise;
 };
 
 exports.revenue = function ( callback) {
