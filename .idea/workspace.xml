@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f72cd700-05da-4559-92ce-e55ddef8ff60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/commons/googlemapshandler.js" afterPath="$PROJECT_DIR$/services/commons/googlemapshandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/commons/mysqlhandler.js" afterPath="$PROJECT_DIR$/services/commons/mysqlhandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/customers/customershandler.js" afterPath="$PROJECT_DIR$/services/customers/customershandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/populateDB/PopulateDB.js" afterPath="$PROJECT_DIR$/services/populateDB/PopulateDB.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/products/productshandler.js" afterPath="$PROJECT_DIR$/services/products/productshandler.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/trips/tripshandler.js" afterPath="$PROJECT_DIR$/services/trips/tripshandler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/trucks/truckshandler.js" afterPath="$PROJECT_DIR$/services/trucks/truckshandler.js" />
     </list>
     <ignored path="amazonfresh_backend.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +38,8 @@
       <file leaf-file-name="tripshandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3510">
-              <caret line="234" column="48" selection-start-line="234" selection-start-column="48" selection-end-line="234" selection-end-column="48" />
+            <state relative-caret-position="219">
+              <caret line="369" column="4" selection-start-line="369" selection-start-column="2" selection-end-line="369" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -72,21 +67,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="productshandler.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="productshandler.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3345">
-              <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
+            <state relative-caret-position="201">
+              <caret line="353" column="92" selection-start-line="353" selection-start-column="92" selection-end-line="353" selection-end-column="92" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PopulateDB.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PopulateDB.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/populateDB/PopulateDB.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="250" column="7" selection-start-line="250" selection-start-column="7" selection-end-line="250" selection-end-column="7" />
+            <state relative-caret-position="-1781">
+              <caret line="220" column="37" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -127,8 +122,8 @@
       <file leaf-file-name="customershandler.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/services/customers/customershandler.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5325">
-              <caret line="355" column="14" selection-start-line="355" selection-start-column="14" selection-end-line="355" selection-end-column="14" />
+            <state relative-caret-position="5355">
+              <caret line="357" column="14" selection-start-line="357" selection-start-column="14" selection-end-line="357" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -159,13 +154,13 @@
         <option value="$PROJECT_DIR$/services/farmers/farmerhandler.js" />
         <option value="$PROJECT_DIR$/services/bills/billshandler.js" />
         <option value="$PROJECT_DIR$/services/admin/adminhandler.js" />
-        <option value="$PROJECT_DIR$/services/trips/tripshandler.js" />
-        <option value="$PROJECT_DIR$/services/customers/customershandler.js" />
         <option value="$PROJECT_DIR$/services/trucks/truckshandler.js" />
         <option value="$PROJECT_DIR$/services/commons/mysqlhandler.js" />
-        <option value="$PROJECT_DIR$/services/products/productshandler.js" />
         <option value="$PROJECT_DIR$/services/commons/googlemapshandler.js" />
         <option value="$PROJECT_DIR$/services/populateDB/PopulateDB.js" />
+        <option value="$PROJECT_DIR$/services/customers/customershandler.js" />
+        <option value="$PROJECT_DIR$/services/trips/tripshandler.js" />
+        <option value="$PROJECT_DIR$/services/products/productshandler.js" />
       </list>
     </option>
   </component>
@@ -417,7 +412,7 @@
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="my&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/commons/mysqlhandler.js&#10;trips&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;admin&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/admin/adminhandler.js&#10;customerhand&#9;null&#9;null&#10;bills&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;bil&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;produ&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;customer&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;farmerha&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;trucks&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trucks/truckshandler.js&#10;product&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;products&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;custo&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;tripshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;adminhandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/admin/adminhandler.js&#10;customers&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;farmer&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;productshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;bill&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;farmerh&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;bi&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;productshan&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js" />
+    <property name="SearchEverywhereHistoryKey" value="produc&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;trips&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;my&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/commons/mysqlhandler.js&#10;admin&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/admin/adminhandler.js&#10;customerhand&#9;null&#9;null&#10;bills&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;bil&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;produ&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;customer&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;farmerha&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;trucks&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trucks/truckshandler.js&#10;product&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;products&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;custo&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;tripshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/trips/tripshandler.js&#10;adminhandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/admin/adminhandler.js&#10;customers&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/customers/customershandler.js&#10;farmer&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;productshandler&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js&#10;bill&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;farmerh&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/farmers/farmerhandler.js&#10;bi&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/bills/billshandler.js&#10;productshan&#9;FILE&#9;file:///Users/pratiksanglikar/WebstormProjects/amazonfresh_backend/services/products/productshandler.js" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="106" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="107" />
@@ -526,7 +521,7 @@
       <workItem from="1462297274311" duration="11724000" />
       <workItem from="1462314108809" duration="30306000" />
       <workItem from="1462390175576" duration="610000" />
-      <workItem from="1462394440406" duration="718000" />
+      <workItem from="1462394440406" duration="2363000" />
     </task>
     <task id="LOCAL-00001" summary="Redis implemented for trips.">
       <created>1462074863839</created>
@@ -612,17 +607,24 @@
       <option name="project" value="LOCAL" />
       <updated>1462345685270</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Populate DB method updated.">
+      <created>1462395485023</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1462395485024</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104223000" />
+    <option name="totallyTimeSpent" value="105868000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="724" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494043" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32753164" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -664,7 +666,8 @@
     <MESSAGE value="populate bills" />
     <MESSAGE value="resolved the issue - &#10;Ratings are not added with RabbitMQ." />
     <MESSAGE value="added new chart - trips per delivery location." />
-    <option name="LAST_COMMIT_MESSAGE" value="added new chart - trips per delivery location." />
+    <MESSAGE value="Populate DB method updated." />
+    <option name="LAST_COMMIT_MESSAGE" value="Populate DB method updated." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1011,22 +1014,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3510">
-          <caret line="234" column="48" selection-start-line="234" selection-start-column="48" selection-end-line="234" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/services/customers/customershandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5325">
-          <caret line="355" column="14" selection-start-line="355" selection-start-column="14" selection-end-line="355" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/trucks/truckshandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2970">
@@ -1043,14 +1030,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3345">
-          <caret line="223" column="16" selection-start-line="223" selection-start-column="16" selection-end-line="223" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/services/commons/googlemapshandler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1059,10 +1038,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/services/customers/customershandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5355">
+          <caret line="357" column="14" selection-start-line="357" selection-start-column="14" selection-end-line="357" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/trips/tripshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="369" column="4" selection-start-line="369" selection-start-column="2" selection-end-line="369" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/services/populateDB/PopulateDB.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="250" column="7" selection-start-line="250" selection-start-column="7" selection-end-line="250" selection-end-column="7" />
+        <state relative-caret-position="-1781">
+          <caret line="220" column="37" selection-start-line="220" selection-start-column="37" selection-end-line="220" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/products/productshandler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="353" column="92" selection-start-line="353" selection-start-column="92" selection-end-line="353" selection-end-column="92" />
           <folding />
         </state>
       </provider>

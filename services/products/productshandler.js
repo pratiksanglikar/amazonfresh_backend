@@ -37,12 +37,12 @@ exports.handleRequest = function (message, callback) {
 			break;
 
 		case "update_products":
-			console.log("In update products");
+			//console.log("In update products");
 			exports.updateproduct(message.data, callback);
 			break;
 
 		case "searchProductByName":
-			console.log("In search Products By Name");
+			//console.log("In search Products By Name");
 			exports.searchproduct(message.data, callback);
 			break;
 
@@ -350,8 +350,8 @@ exports.searchByProductId = function (info,callback) {
 exports.searchproduct = function (info,callback) {
 	var productName = info.productName;
 	var productList = [];
-	console.log("In product handler and product Name is --"+ productName);
-	var cursor = MongoDB.collection("products").find({"productName": productName});
+	//console.log("In product handler and product Name is --"+ productName);
+	var cursor = MongoDB.collection("products").find({"productName": {$regex: productName}});
 	if(cursor != null)
 	{
 		cursor.each(function(err,product){

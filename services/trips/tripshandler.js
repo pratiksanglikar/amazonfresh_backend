@@ -308,7 +308,7 @@ _constructTripDetails = function (customer, farmer, product, journeyDetails, dri
 		customerAddress = customer.address + " , " + customer.city + " , " + customer.state + " , " + customer.zipCode,
 		farmerAddress = farmer.address + " , " + farmer.city + " , " + farmer.state + " , " + farmer.zipCode,
 		orderTime = new Date().getTime(),
-		deliveryTime = orderTime + (journeyDetails.timeRequired * 10),
+		deliveryTime = orderTime + (journeyDetails.timeRequired * 1000),
 		deliverySteps = journeyDetails.steps;
 
 	var tripDetails = {
