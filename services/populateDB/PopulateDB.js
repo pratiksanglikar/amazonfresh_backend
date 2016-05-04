@@ -209,10 +209,11 @@ constructDriverInfo = function (i) {
 
 populateBills = function (message, callback) {
 
-	var i = 0;
+	var i = 6000;
+	var j = 0;
 	function myLoop(i) {
 		setTimeout(function () {
-			if(i < 5000) {
+			if(i < 10000 && j < 80000) {
 				var messagePromise = _constructMessageDetails(i);
 				messagePromise.done(function (message) {
 					Bills.generatebill({
@@ -228,55 +229,33 @@ populateBills = function (message, callback) {
 				}, function (error) {
 					console.log(i + " Error generating bill : " + error);
 				});
+			} else {
+				i = 0;
 			}
-			i += 3;
+			i++;
+			j++;
 			myLoop(i);
-		}, 750);
+		}, 150);
 	}
 	myLoop(i);
-
-
-	/**
-	 * message.customerSSN = ''
-	 * message.info.total_amount = ''
-	 * message.info.product_details
-	 * {
-  "total_amount": 31.95,
-  "product_details": [
-    {
-      "product_id": "64b00347460234bf7bc7a68c3be9c9c20341026c",
-      "quantity": 3,
-      "price_per_unit": 1.99,
-      "farmer_id": "002-23-0014",
-      "product_name": "Avocado",
-      "product_image_url": "https://images-na.ssl-images-amazon.com/images/I/81u0TBolABL._SR280,280_.jpg"
-    },
-    {
-      "product_id": "e3d59159d00fc869831f04fb9a25f0a8bff6a9e8",
-      "quantity": 4,
-      "price_per_unit": 4.5,
-      "farmer_id": "002-23-0013",
-      "product_name": "Gala Apple",
-      "product_image_url": "https://images-na.ssl-images-amazon.com/images/I/61gzmIezKqL._SR280,280_.jpg"
-    },
-    {
-      "product_id": "8a9b59d6c326edce8015c26f9c615a557a9b532a",
-      "quantity": 2,
-      "price_per_unit": 3.99,
-      "farmer_id": "002-23-0011",
-      "product_name": "Papaya",
-      "product_image_url": "https://www.freshdirect.com/media/images/product/fruit_2/fru_pid_2210504_p.jpg?lastModify=2016-04-26&publishId=2315"
-    }
-  ]
-}
-	 */
+/*
+	for(var i = 0; i < randomAddresses.length; i++) {
+		for(var j = 0; j < randomAddresses.length; j++) {
+			var string = randomAddresses[i].city + randomAddresses[j].city;
+			string = string.replace(' ','');
+			MongoDB.collection("GoogleMaps").insert({
+				string: string,
+				
+			})
+		}
+	}*/
 }
 
 _constructMessageDetails = function (i) {
 	var deferred = Q.defer();
 	var message = {};
 	var customerSSN = getCustomerSSN(i);
-	var productPromise = getRandomProduct(Math.abs(6542 - i));
+	var productPromise = getRandomProduct(Math.abs(9834 - i));
 	productPromise.done(function (product) {
 		message.product_details = [{
 			product_id: product.productID,

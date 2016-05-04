@@ -232,7 +232,7 @@ exports.generateTrip = function (customerID, farmerID, productID, callback) {
 			product = values[2];
 		var driverPromise = _findFreeDriver();
 		driverPromise.done(function (driver) {
-			var journeyPromise = GoogleMaps.getDirections(farmer.location, customer.location);
+			var journeyPromise = GoogleMaps.getDirections(farmer.location, customer.location, farmer.city, customer.city);
 			journeyPromise.done(function (journeyDetails) {
 				var tripDetails = _constructTripDetails(customer, farmer, product, journeyDetails, driver);
 				var cursor = MongoDB.collection("trips").insert(tripDetails);

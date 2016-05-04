@@ -33,7 +33,7 @@ exports.signup = function(info,callback)
         info.location = values[1];
         var cursor = MongoDB.collection("users").insert(info);
         cursor.then(function () {
-            console.log("yuppie..>!!!!");
+            //console.log("yuppie..>!!!!");
             callback(null, {
                 statusCode: 200,
                 error: null
@@ -81,7 +81,7 @@ exports.deleteCustomer = function (ssn) {
  */
 exports.getCustomersList = function()
 {
-    console.log("In get list function");
+    //console.log("In get list function");
     var customers = [];
     var deferred = Q.defer();
     var cursor = MongoDB.collection("users").find({"usertype" : "CUSTOMER"}).limit(250);
@@ -128,7 +128,7 @@ exports.getCustomer = function (ssn) {
             if (customer === null) {
                 deferred.reject("Customer not found!");
             } else {
-                console.log(customer);
+                //console.log(customer);
                 deferred.resolve(customer);
             }
         }
@@ -175,7 +175,7 @@ _validateCustomerInfo = function (info) {
 };
 
 _sanitizeCustomerInfo = function (info) {
-    console.log("In cust sanitize");
+    //console.log("In cust sanitize");
     info.password = PasswordManager.encryptPassword(info.password);
     info.usertype = UserTypes.CUSTOMER;
     info.isApproved = false;
@@ -211,10 +211,10 @@ exports.customerViewInfo = function(info,callback)
 exports.updateCustomer = function(info,callback)
 {
     var deferred = Q.defer();
-    console.log(info);
+    //console.log(info);
     var promise = _validateCustomerInfo1(info);
     promise.done(function () {
-        console.log("Repeater");
+        //console.log("Repeater");
         var cursor = MongoDB.collection("users").update({"ssn": info.ssn,"usertype" : "CUSTOMER"},
             {
                 "ssn": info.ssn,
@@ -345,15 +345,15 @@ _validateCustomerInfo1 = function(info)
         Utilities.isEmpty(info.password) 	||
         Utilities.isEmpty(info.email))
     {
-        console.log("error from here");
+        //console.log("error from here");
         deferred.reject("All values must be provided! ");
     } else {
         if(!Utilities.validateState(info.state)) {
-            console.log("invalid sate");
+            //console.log("invalid sate");
             deferred.reject("Invalid state!");
         } else
         if(!Utilities.validateZipCode(info.zipCode)) {
-            console.log("invalid zip code");
+            //console.log("invalid zip code");
             deferred.reject("Invalid zip code!");
         } else
         {

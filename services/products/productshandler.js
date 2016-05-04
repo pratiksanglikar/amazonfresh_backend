@@ -216,7 +216,11 @@ exports.getproductinfo = function (productID, callback) {
 			}
 		} else {
 			if(reply) {
-				deferred.resolve(JSON.parse(reply));
+				try {
+					deferred.resolve(JSON.parse(reply));
+				} catch (error) {
+					deferred.reject("Unable to parse!");
+				}
 				if(callback) {
 					callback(null, {
 						statusCode: 200,

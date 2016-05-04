@@ -183,13 +183,13 @@ exports.getTruck = function(ssn, callback) {
 			return;
 		}
 		if(reply) {
-			console.log("Cache hit for truck " + ssn);
+			//console.log("Cache hit for truck " + ssn);
 			callback(null, {
 				statusCode: 200,
 				response: JSON.parse(reply)
 			});
 		} else {
-			console.log("Cache miss for truck " + ssn);
+			//console.log("Cache miss for truck " + ssn);
 			var cursor = MongoDB.collection("users").find({
 				ssn: ssn,
 				isApproved: true,
@@ -211,7 +211,7 @@ exports.getTruck = function(ssn, callback) {
 					} else {
 						delete user.password;
 						redis.set(ssn, JSON.stringify(user), function () {
-							console.log("Inserting truck  " + ssn + " into cache!");
+							//console.log("Inserting truck  " + ssn + " into cache!");
 							callback(null,{
 								statusCode: 200,
 								response: user
